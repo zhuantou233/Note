@@ -9,7 +9,6 @@ import cn.bmob.v3.datatype.BmobFile;
  */
 public class MyUser extends BmobUser {
     private String nickName;
-    private String phoneNumber;
     private BmobFile avatar;
     private String accountType;
 
@@ -22,14 +21,6 @@ public class MyUser extends BmobUser {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public BmobFile getAvatar() {

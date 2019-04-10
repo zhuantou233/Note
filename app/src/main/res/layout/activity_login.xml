@@ -153,7 +153,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_tiny"
                 android:background="@drawable/button_shape_default_rounded"
-                android:text="@string/login"
+                android:text="@string/sign_in"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_size_large"
                 android:textStyle="normal"
@@ -175,7 +175,7 @@
                 <TextView
                     android:id="@+id/forget_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:gravity="center"
@@ -185,11 +185,11 @@
                 <TextView
                     android:id="@+id/sign_up_tv"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:gravity="center"
-                    android:text="@string/sign_up"
+                    android:text="@string/sign_up_now"
                     android:textColor="@color/colorTheme"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
