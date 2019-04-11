@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/margin_tiny"
+                android:layout_marginBottom="@dimen/margin_large"
                 android:text="@string/app_name"
                 android:textColor="@color/colorTheme"
                 android:textSize="@dimen/app_name_size"
@@ -106,10 +106,9 @@
                 android:id="@+id/sign_up_form"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginBottom="@dimen/padding_small"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="invisible">
 
                 <ImageView
                     android:layout_width="@dimen/image_size_medium"
@@ -151,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_tiny"
+                android:layout_marginTop="@dimen/margin_special"
                 android:background="@drawable/button_shape_default_rounded"
                 android:text="@string/sign_in"
                 android:textColor="@color/colorWhite"

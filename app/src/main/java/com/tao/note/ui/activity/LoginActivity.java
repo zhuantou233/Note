@@ -201,7 +201,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void cancelSignInWithCode() {
         LOGIN_CODE = Constants.LOGIN_WITH_PASSWORD;
-        signUpForm.setVisibility(View.GONE);
+        signUpForm.setVisibility(View.INVISIBLE);
         signUpTextView.setText(getString(R.string.sign_up_now));
         forgetTextView.setVisibility(View.VISIBLE);
         passwordFrom.setVisibility(View.VISIBLE);
@@ -220,7 +220,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void cancelSignUp() {
         LOGIN_CODE = Constants.LOGIN_WITH_PASSWORD;
-        signUpForm.setVisibility(View.GONE);
+        signUpForm.setVisibility(View.INVISIBLE);
         signUpTextView.setText(getString(R.string.sign_up_now));
         forgetTextView.setVisibility(View.VISIBLE);
         signInBtn.setText(getString(R.string.sign_in));
