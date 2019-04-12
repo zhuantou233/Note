@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.tao.note.R;
+import com.tao.note.utils.ToastUtil;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,15 +34,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
+        initUI();
+        initData();
+        initListener();
         if (isSetStatusBar) {
             steepStatusBar();
         }
         if (isSetStatusBarColor) {
             statusBarColor();
         }
-        initUI();
-        initData();
-        initListener();
     }
 
     @Override
@@ -69,11 +70,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int getLayoutId();
 
     protected void longToast(String mToastMsg) {
-        Toast.makeText(this, mToastMsg, Toast.LENGTH_LONG).show();
+        ToastUtil.getInstance(this).longToast(mToastMsg);
     }
 
     protected void shortToast(String mToastMsg) {
-        Toast.makeText(this, mToastMsg, Toast.LENGTH_SHORT).show();
+        ToastUtil.getInstance(this).shortToast(mToastMsg);
     }
 
     protected void hideKeyboard() {

@@ -19,7 +19,6 @@
         android:paddingRight="@dimen/padding_small">
 
         <LinearLayout
-            android:id="@+id/phone_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -37,6 +36,7 @@
 
 
             <LinearLayout
+                android:id="@+id/phone_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="@dimen/padding_small"
@@ -106,6 +106,7 @@
                 android:id="@+id/sign_up_form"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:layout_marginBottom="@dimen/padding_small"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:visibility="invisible">
@@ -145,12 +146,18 @@
 
             </LinearLayout>
 
+            <View
+                android:id="@+id/placeholder"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_marginBottom="@dimen/padding_small"
+                android:visibility="gone" />
+
             <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
                 android:id="@+id/phone_sign_in_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_special"
                 android:background="@drawable/button_shape_default_rounded"
                 android:text="@string/sign_in"
                 android:textColor="@color/colorWhite"
