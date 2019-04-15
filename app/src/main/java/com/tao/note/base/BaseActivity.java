@@ -45,6 +45,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void bind(Object object){
+
+    }
+
     @Override
     public void setContentView(int layoutResID) {
         View view = getLayoutInflater().inflate(R.layout.activity_base, null);
