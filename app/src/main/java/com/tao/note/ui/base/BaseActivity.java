@@ -1,4 +1,4 @@
-package com.tao.note.base;
+package com.tao.note.ui.base;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.tao.note.R;
 import com.tao.note.utils.ToastUtil;

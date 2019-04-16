@@ -1,4 +1,4 @@
-package com.tao.note.base;
+package com.tao.note.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Tao Zhou on 2019/4/15
- * Package name: com.tao.note.base
+ * Package name: com.tao.note.ui.base
  */
 public abstract class BaseFragmnet extends Fragment {
     @Override

@@ -1,4 +1,4 @@
-package com.tao.note.ui.activity;
+package com.tao.note.ui.login;
 
 
 import android.content.Intent;
@@ -17,8 +17,9 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.tao.note.R;
-import com.tao.note.base.BaseActivity;
-import com.tao.note.data.remote.model.MyUser;
+import com.tao.note.ui.base.BaseActivity;
+import com.tao.note.data.model.MyUser;
+import com.tao.note.ui.main.MainActivity;
 import com.tao.note.utils.Constants;
 import com.tao.note.utils.Util;
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin"
-    tools:context=".ui.activity.LoginActivity">
+    tools:context=".ui.login.LoginActivity">
 
     <ScrollView
         android:id="@+id/login_form"

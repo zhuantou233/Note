@@ -1,11 +1,11 @@
-package com.tao.note.data.remote.model;
+package com.tao.note.data.model;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by Tao Zhou on 2019/4/9
- * Package name: com.tao.note.data.remote.model
+ * Package name: com.tao.note.data.model
  */
 public class MyUser extends BmobUser {
     private String nickName;

@@ -1,10 +1,9 @@
-package com.tao.note.ui.activity;
+package com.tao.note.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
@@ -21,7 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tao.note.R;
-import com.tao.note.data.remote.model.MyUser;
+import com.tao.note.data.model.MyUser;
+import com.tao.note.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
