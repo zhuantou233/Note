@@ -20,7 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tao.note.R;
-import com.tao.note.data.model.MyUser;
+import com.tao.note.data.model.db.MyUser;
 import com.tao.note.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity

@@ -1,4 +1,4 @@
-package com.tao.note.data.model;
+package com.tao.note.data.model.db;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
