@@ -9,4 +9,5 @@ import com.tao.note.data.remote.ApiHelper;
  * Package name: com.tao.note.data
  */
 public interface DataManager extends DBHelper, ApiHelper, PreferencesHelper {
+
 }

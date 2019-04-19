@@ -23,7 +23,7 @@ public abstract class BaseFragmnet extends Fragment {
     }
 
     private void bindDependencies() {
-//        ((BaseActivity) getActivity()).bind(this);
+//        ((BaseActivity1) getActivity()).bind(this);
     }
 
     @Nullable

@@ -21,7 +21,7 @@ import android.view.MenuItem;
 
 import com.tao.note.R;
 import com.tao.note.data.model.db.MyUser;
-import com.tao.note.ui.login.LoginActivity;
+import com.tao.note.ui.login.LoginActivity1;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
 
         user = BmobUser.getCurrentUser(MyUser.class);
         if (user == null) {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity1.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity1.class));
             }
         });
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            startActivity(new Intent(MainActivity.this, LoginActivity1.class));
             return true;
         }
 
