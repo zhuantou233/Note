@@ -20,6 +20,10 @@ android {
             buildConfigField("String", "API_KEY", "4d2a9466555b5738db944c69e8b58c9c")
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
     dataBinding {
         enabled = true
     }

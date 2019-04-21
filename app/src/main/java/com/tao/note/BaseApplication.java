@@ -3,6 +3,7 @@ package com.tao.note;
 import android.app.Activity;
 import android.app.Application;
 
+import com.tao.note.di.component.DaggerAppComponent;
 import com.tao.note.utils.Constants;
 
 import javax.inject.Inject;
@@ -41,10 +42,10 @@ public class BaseApplication extends Application implements HasActivityInjector 
         super.onCreate();
 //        INSTANCE = this;
 //        context = getApplicationContext();
-//        DaggerAppComponent.builder()
-//                .application(this)
-//                .build()
-//                .inject(this);
+        DaggerAppComponent.builder()
+                .application(this)
+                .build()
+                .inject(this);
         Bmob.initialize(this, Constants.BMOB_APPID);
     }
 }

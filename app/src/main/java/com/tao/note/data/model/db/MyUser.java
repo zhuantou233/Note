@@ -10,7 +10,7 @@ import cn.bmob.v3.datatype.BmobFile;
 public class MyUser extends BmobUser {
     private String nickName;
     private BmobFile avatar;
-    private String accountType;
+    private int accountType;
 
     public MyUser() {
     }
@@ -31,11 +31,11 @@ public class MyUser extends BmobUser {
         this.avatar = avatar;
     }
 
-    public String getAccountType() {
+    public int getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
+    public void setAccountType(int accountType) {
         this.accountType = accountType;
     }
 }

@@ -14,8 +14,12 @@ import com.tao.note.data.local.db.AppDatabase;
 import com.tao.note.data.local.db.DBHelper;
 import com.tao.note.data.local.prefs.AppPreferencesHelper;
 import com.tao.note.data.local.prefs.PreferencesHelper;
+import com.tao.note.data.remote.ApiHelper;
+import com.tao.note.data.remote.AppApiHelper;
 import com.tao.note.di.ApiInfo;
 import com.tao.note.di.DatabaseInfo;
+import com.tao.note.di.PreferenceInfo;
+import com.tao.note.utils.AppConstants;
 import com.tao.note.utils.rx.AppSchedulerProvider;
 import com.tao.note.utils.rx.SchedulerProvider;
 
@@ -33,12 +37,12 @@ import io.github.inflationx.calligraphy3.CalligraphyConfig;
 @Module
 public class AppModule {
 
-    //    @Provides
-//    @Singleton
-//    ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
-//        return appApiHelper;
-//    }
-//
+    @Provides
+    @Singleton
+    ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
+        return appApiHelper;
+    }
+
     @Provides
     @ApiInfo
     String provideApiKey() {
@@ -67,41 +71,41 @@ public class AppModule {
         return application;
     }
 
-//    @Provides
-//    @Singleton
-//    DataManager provideDataManager(AppDataManager appDataManager) {
-//        return appDataManager;
-//    }
-//
-//    @Provides
-//    @DatabaseInfo
-//    String provideDatabaseName() {
-//        return AppConstants.DB_NAME;
-//    }
+    @Provides
+    @Singleton
+    DataManager provideDataManager(AppDataManager appDataManager) {
+        return appDataManager;
+    }
 
-//    @Provides
-//    @Singleton
-//    DBHelper provideDbHelper(AppDBHelper appDbHelper) {
-//        return appDbHelper;
-//    }
+    @Provides
+    @DatabaseInfo
+    String provideDatabaseName() {
+        return AppConstants.DB_NAME;
+    }
+
+    @Provides
+    @Singleton
+    DBHelper provideDbHelper(AppDBHelper appDbHelper) {
+        return appDbHelper;
+    }
 
     @Provides
     @Singleton
     Gson provideGson() {
         return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
-//
-//    @Provides
-//    @PreferenceInfo
-//    String providePreferenceName() {
-//        return AppConstants.PREF_NAME;
-//    }
-//
-//    @Provides
-//    @Singleton
-//    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
-//        return appPreferencesHelper;
-//    }
+
+    @Provides
+    @PreferenceInfo
+    String providePreferenceName() {
+        return AppConstants.PREF_NAME;
+    }
+
+    @Provides
+    @Singleton
+    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
+    }
 //
 //    @Provides
 //    @Singleton
@@ -113,10 +117,10 @@ public class AppModule {
 //                preferencesHelper.getAccessToken());
 //    }
 
-//    @Provides
-//    SchedulerProvider provideSchedulerProvider() {
-//        return new AppSchedulerProvider();
-//    }
+    @Provides
+    SchedulerProvider provideSchedulerProvider() {
+        return new AppSchedulerProvider();
+    }
 
 }
 
