@@ -13,6 +13,22 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
     }
 
     public void startSeeding() {
+        getCompositeDisposable().add(
+                getDataManager().seedAppSettings()
+                        .subscribeOn(getSchedulerProvider().io())
+                        .observeOn(getSchedulerProvider().ui())
+                        .subscribe(aBoolean -> {
+                            decideNextActivity();
+                        }, throwable -> {
+                            decideNextActivity();
+                        }));
+    }
 
+    private void decideNextActivity() {
+        if (getDataManager().getCurrentUserLoggedInMode() == DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()) {
+            getNavigator().openLoginActivity();
+        } else {
+            getNavigator().openMainActivity();
+        }
     }
 }

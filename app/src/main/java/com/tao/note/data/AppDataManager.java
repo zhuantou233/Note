@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
+import io.reactivex.Observable;
 
 /**
  * Created by Tao Zhou on 2019/4/17
@@ -43,6 +44,12 @@ public class AppDataManager implements DataManager {
     @Override
     public ApiHeader getApiHeader() {
         return mApiHelper.getApiHeader();
+    }
+
+    @Override
+    public Observable<Boolean> seedAppSettings() {
+        // todo app初始化加载固定资源或设置
+        return Observable.just(true);
     }
 
     @Override

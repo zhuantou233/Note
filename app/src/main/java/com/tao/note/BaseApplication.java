@@ -3,6 +3,8 @@ package com.tao.note;
 import android.app.Activity;
 import android.app.Application;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.tao.note.di.component.DaggerAppComponent;
 import com.tao.note.utils.Constants;
 
@@ -47,5 +49,10 @@ public class BaseApplication extends Application implements HasActivityInjector 
                 .build()
                 .inject(this);
         Bmob.initialize(this, Constants.BMOB_APPID);
+
+        AndroidNetworking.initialize(getApplicationContext());
+        if (BuildConfig.DEBUG) {
+            AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
+        }
     }
 }

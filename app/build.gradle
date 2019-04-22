@@ -21,8 +21,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility '1.8'
+        targetCompatibility '1.8'
     }
     dataBinding {
         enabled = true
@@ -49,6 +49,9 @@ dependencies {
     // rxjava2
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+
+    // network
+    implementation "com.amitshekhar.android:android-networking:$rootProject.rx2FastAndroidNetworking"
 
     // fresco
     implementation "com.facebook.fresco:fresco:$rootProject.frescoVersion"

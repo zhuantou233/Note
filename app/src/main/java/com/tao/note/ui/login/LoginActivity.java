@@ -2,7 +2,9 @@ package com.tao.note.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.tao.note.BR;
@@ -56,5 +58,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     public void openMainActivity() {
 
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivityLoginBinding = getViewDataBinding();
+        mLoginViewModel.setNavigator(this);
     }
 }

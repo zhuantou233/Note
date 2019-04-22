@@ -27,6 +27,6 @@ public abstract class ActivityBuilder {
 //            RateUsDialogProvider.class})
 //    abstract MainActivity bindMainActivity();
 //
-//    @ContributesAndroidInjector
-//    abstract SplashActivity bindSplashActivity();
+    @ContributesAndroidInjector
+    abstract SplashActivity bindSplashActivity();
 }
