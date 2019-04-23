@@ -40,4 +40,7 @@
     <string name="account_code_error">账号或验证码错误</string>
     <string name="phone_reg">^((1[345][0-9])|(16[56])|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\\d{8}$</string>
     <string name="login_success">登录成功</string>
+    <string name="sign_up_account">账号注册</string>
+    <string name="reset_password">重置密码</string>
+    <string name="password_confirm">确认密码</string>
 </resources>

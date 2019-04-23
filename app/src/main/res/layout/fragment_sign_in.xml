@@ -4,11 +4,14 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
-            type="com.tao.note.ui.login.signup.SignUpViewModel" />
+            type="com.tao.note.ui.login.signin.SignInViewModel" />
 
     </data>
+
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -20,20 +23,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="@dimen/margin_special"
-                android:background="@color/colorWhite"
-                android:onClick="@{()->viewModel.onNavBackClick()}"
-                android:src="@drawable/ic_arrow_back_black_40dp" />
-
             <TextView
-                style="@style/TextStyle.Description"
+                style="@style/TextStyle.Heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sign_up_account" />
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_huge"
+                android:layout_marginBottom="@dimen/margin_huge"
+                android:text="@string/app_name" />
 
             <LinearLayout
                 android:id="@+id/phone_login_form"
@@ -88,55 +85,44 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/sign_up_form"
-                style="@style/InputFormStyle"
-                android:layout_width="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    style="@style/InputFormImageStyle"
-                    android:src="@drawable/ic_verification_code" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/user_verification_code"
-                        style="@style/InputFormNumStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/verification_code"
-                        android:maxLength="6" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <Button
-                    android:id="@+id/get_verification_code_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="@dimen/margin_special"
-                    android:background="@drawable/button_user_modify"
-                    android:text="@string/get_verification_code"
-                    android:textColor="@color/colorGrey"
-                    android:textStyle="normal" />
-
-            </LinearLayout>
-
             <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
                 android:id="@+id/phone_sign_in_button"
                 style="@style/LoadingButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/sign_up_now"
+                android:onClick="@{() -> viewModel.onServerLoginClick()}"
+                android:text="@string/sign_in"
                 app:finalCornerAngle="50dp"
                 app:initialCornerAngle="50dp"
                 app:spinning_bar_color="@android:color/white"
                 app:spinning_bar_padding="6dp"
                 app:spinning_bar_width="3dp" />
+
+            <LinearLayout
+                android:id="@+id/other_form"
+                style="@style/InputFormStyle"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/padding_small">
+
+                <TextView
+                    android:id="@+id/forget_tv"
+                    style="@style/OtherOptionTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.onResetPasswordClick()}"
+                    android:text="@string/forget_password" />
+
+                <TextView
+                    android:id="@+id/sign_up_tv"
+                    style="@style/OtherOptionTextStyle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.onSignUpClick()}"
+                    android:text="@string/sign_up_now"
+                    android:textColor="@color/colorTheme" />
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -60,7 +60,7 @@ public class AppModule {
     @Singleton
     CalligraphyConfig provideCalligraphyDefaultConfig() {
         return new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/webfont.ttf")
+                .setDefaultFontPath("fonts/AppName.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build();
     }

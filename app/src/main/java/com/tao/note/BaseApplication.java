@@ -14,6 +14,8 @@ import cn.bmob.v3.Bmob;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 
 public class BaseApplication extends Application implements HasActivityInjector {
 
@@ -54,5 +56,11 @@ public class BaseApplication extends Application implements HasActivityInjector 
         if (BuildConfig.DEBUG) {
             AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
         }
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
     }
 }

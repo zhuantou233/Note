@@ -12,7 +12,4 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     public LoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
-    public void onServerLoginClick() {
-        getNavigator().login();
-    }
 }

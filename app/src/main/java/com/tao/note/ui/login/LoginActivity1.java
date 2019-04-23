@@ -95,7 +95,7 @@ public class LoginActivity1 extends BaseActivity1 implements View.OnClickListene
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/webfont.ttf");
+        Typeface typeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/AppName.ttf");
         appName.setTypeface(typeface);
         setSteepStatusBar(true);
         setStatusBarColor(true);

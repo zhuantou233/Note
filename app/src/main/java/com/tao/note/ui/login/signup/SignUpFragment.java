@@ -48,13 +48,15 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpVi
     }
 
     @Override
-    public void goBack() {
-        getBaseActivity().onFragmentDetached(TAG);
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSignUpViewModel.setNavigator(this);
     }
+
+    @Override
+    public void goBack() {
+        getBaseActivity().onFragmentDetached(TAG);
+    }
+
+
 }

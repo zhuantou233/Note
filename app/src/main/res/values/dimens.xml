@@ -8,19 +8,21 @@
     <dimen name="common_margin">16dp</dimen>
     <dimen name="app_icon_size">44dp</dimen>
     <dimen name="app_name_size">40sp</dimen>
-    <dimen name="margin_huge">120dp</dimen>
+    <dimen name="margin_huge">60dp</dimen>
     <dimen name="margin_large">50dp</dimen>
     <dimen name="margin_medium">40dp</dimen>
     <dimen name="margin_small">30dp</dimen>
     <dimen name="margin_tiny">20dp</dimen>
     <dimen name="image_size_medium">36dp</dimen>
     <dimen name="margin_special">6dp</dimen>
+    <dimen name="input_form_height">60dp</dimen>
     <!-- common -->
     <dimen name="text_size_mini">10sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_medium">14sp</dimen>
     <dimen name="text_size_large">16sp</dimen>
     <dimen name="text_size_huge">18sp</dimen>
+    <dimen name="text_size_special">30sp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="padding_large">24dp</dimen>
