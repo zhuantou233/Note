@@ -4,8 +4,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.tao.note.ui.login.signin.SignInViewModel" />
@@ -46,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/user_phone_number"
                         style="@style/InputFormNumStyle"
                         android:layout_width="match_parent"
@@ -69,9 +67,10 @@
                     android:src="@drawable/ic_password" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ti_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:passwordToggleEnabled="true">
+                    app:passwordToggleEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/user_password"
@@ -91,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:onClick="@{() -> viewModel.onServerLoginClick()}"
+                android:onClick="@{() -> viewModel.onSignInClick()}"
                 android:text="@string/sign_in"
                 app:finalCornerAngle="50dp"
                 app:initialCornerAngle="50dp"
@@ -112,7 +111,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:onClick="@{() -> viewModel.onResetPasswordClick()}"
-                    android:text="@string/forget_password" />
+                    android:text="@string/forget_password"
+                    android:textColor="@drawable/custom_border_txt_color" />
 
                 <TextView
                     android:id="@+id/sign_up_tv"
@@ -121,7 +121,7 @@
                     android:layout_weight="1"
                     android:onClick="@{() -> viewModel.onSignUpClick()}"
                     android:text="@string/sign_up_now"
-                    android:textColor="@color/colorTheme" />
+                    android:textColor="@drawable/custom_border_txt_color" />
             </LinearLayout>
 
         </LinearLayout>

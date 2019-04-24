@@ -12,7 +12,50 @@ public class SignUpViewModel extends BaseViewModel<SignUpNavigator> {
     public SignUpViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
+
+    private boolean result = false;
+
     public void onNavBackClick() {
         getNavigator().goBack();
+    }
+
+    public void onRequestVerCodeClick() {
+        getNavigator().requestVerCode();
+    }
+
+    public void onSignUpClick() {
+        getNavigator().signUp();
+    }
+
+    public boolean requestVerCode(String phone) {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .doRequestVerCode(phone)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(aBoolean -> {
+                    setIsLoading(false);
+                    result = aBoolean;
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+        return result;
+    }
+
+    public boolean signUp(String phone, String password, String code) {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .doSignUp(phone, password, code)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(aBoolean -> {
+                    setIsLoading(false);
+                    result = aBoolean;
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+        return result;
     }
 }

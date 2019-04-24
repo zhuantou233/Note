@@ -13,8 +13,10 @@ public class SignInViewModel extends BaseViewModel<SignInNavigator> {
         super(dataManager, schedulerProvider);
     }
 
-    public void onServerLoginClick() {
-        getNavigator().login();
+    private boolean result = false;
+
+    public void onSignInClick() {
+        getNavigator().signIn();
     }
 
     public void onSignUpClick() {
@@ -23,5 +25,21 @@ public class SignInViewModel extends BaseViewModel<SignInNavigator> {
 
     public void onResetPasswordClick() {
         getNavigator().showBottomSheetDialog();
+    }
+
+    public boolean signIn(String phone, String password) {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .doSignIn(phone, password)
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(aBoolean -> {
+                    setIsLoading(false);
+                    result = aBoolean;
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+        return result;
     }
 }

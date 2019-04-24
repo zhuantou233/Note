@@ -15,6 +15,9 @@ import com.tao.note.ViewModelProviderFactory;
 import com.tao.note.databinding.ActivityLoginBinding;
 import com.tao.note.ui.base.BaseActivity;
 import com.tao.note.ui.login.signin.SignInFragment;
+import com.tao.note.ui.login.signup.SignUpFragment;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -57,12 +60,44 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivityLoginBinding = getViewDataBinding();
+        mLoginViewModel.setNavigator(this);
+        showSignInFragment();
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+//        Fragment fragment = fragmentManager.findFragmentByTag(SignUpFragment.TAG);
+        List<Fragment> fragments = fragmentManager.getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment == null) {
+                super.onBackPressed();
+            } else {
+                if (!SignInFragment.TAG.equals(fragment.getTag()))
+                    onFragmentDetached(fragment.getTag());
+            }
+        }
+    }
+
+
     public void showSignInFragment() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .disallowAddToBackStack()
-                .add(R.id.root_view, SignInFragment.newInstance(), SignInFragment.TAG)
-                .commit();
+        if (getSupportFragmentManager() != null &&
+                getSupportFragmentManager().findFragmentByTag(SignInFragment.TAG) == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .add(R.id.root_view, SignInFragment.newInstance(), SignInFragment.TAG)
+                    .commit();
+        }
     }
 
     public void onFragmentDetached(String tag) {
@@ -89,16 +124,4 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mActivityLoginBinding = getViewDataBinding();
-        mLoginViewModel.setNavigator(this);
-        showSignInFragment();
-    }
-
-    @Override
-    public AndroidInjector<Fragment> supportFragmentInjector() {
-        return fragmentDispatchingAndroidInjector;
-    }
 }

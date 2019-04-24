@@ -1,17 +1,28 @@
 package com.tao.note.ui.login.signup;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.tao.note.BR;
 import com.tao.note.R;
 import com.tao.note.ViewModelProviderFactory;
 import com.tao.note.databinding.FragmentSignUpBinding;
 import com.tao.note.ui.base.BaseFragment;
+import com.tao.note.ui.custom.MyCountDownTimer;
+import com.tao.note.ui.custom.MyPasswordWatcher;
+import com.tao.note.utils.ToastUtil;
+import com.tao.note.utils.Util;
 
 import javax.inject.Inject;
+
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 
 /**
  * Created by Tao Zhou on 2019/4/22
@@ -20,9 +31,15 @@ import javax.inject.Inject;
 public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpViewModel> implements SignUpNavigator {
 
     public static final String TAG = SignUpFragment.class.getSimpleName();
+
     @Inject
     ViewModelProviderFactory factory;
     private SignUpViewModel mSignUpViewModel;
+    private FragmentSignUpBinding mFragmentSignUpBinding;
+    private TextInputEditText phoneView;
+    private TextInputEditText passwordView;
+    private TextInputEditText codeView;
+    private CircularProgressButton signUpBtn;
 
     public static SignUpFragment newInstance() {
         Bundle args = new Bundle();
@@ -54,9 +71,100 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpVi
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mFragmentSignUpBinding = getViewDataBinding();
+        phoneView = mFragmentSignUpBinding.userPhoneNumber;
+        passwordView = mFragmentSignUpBinding.userPassword;
+        codeView = mFragmentSignUpBinding.userVerificationCode;
+        TextInputLayout passwordTI = mFragmentSignUpBinding.tiInput;
+        passwordView.addTextChangedListener(new MyPasswordWatcher(passwordTI));
+        signUpBtn = mFragmentSignUpBinding.phoneSignUpButton;
+    }
+
+    @Override
     public void goBack() {
         getBaseActivity().onFragmentDetached(TAG);
     }
 
+    @Override
+    public void requestVerCode() {
+        String phone = phoneView.getText().toString();
+        if (!isNetworkConnected()) {
+            ToastUtil.getInstance(getContext()).longToast(getString(R.string.no_network));
+            return;
+        }
+        if (!Util.isPhoneFormatValid(phone)) {
+            phoneView.setError(getString(R.string.phone_invalidate));
+            phoneView.requestFocus();
+            return;
+        }
+        new MyCountDownTimer(
+                60000,
+                1000,
+                mFragmentSignUpBinding.getVerificationCodeBtn).start();
+        if (!mSignUpViewModel.requestVerCode(phone)) {
+            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.get_code_failed));
+        }
+    }
 
+    @Override
+    public void signUp() {
+        String phone = phoneView.getText().toString();
+        String password = passwordView.getText().toString();
+        String code = codeView.getText().toString();
+        if (!isNetworkConnected()) {
+            ToastUtil.getInstance(getContext()).longToast(getString(R.string.no_network));
+            return;
+        }
+        if (!Util.isPhoneFormatValid(phone)) {
+            phoneView.setError(getString(R.string.phone_invalidate));
+            phoneView.requestFocus();
+            return;
+        }
+        if (!Util.isPasswordFormatValid(password)) {
+            passwordView.setError(getString(R.string.psw_can_not_be_null));
+            passwordView.requestFocus();
+            return;
+        }
+        if (!Util.isCodeFormatValid(code)) {
+            codeView.setError(getString(R.string.code_can_not_be_null));
+            codeView.requestFocus();
+            return;
+        }
+        setInputStatus(false);
+        signUpBtn.startAnimation(() -> null);
+        if (!mSignUpViewModel.signUp(phone, password, code)) {
+            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.sign_up_fail));
+            signUpBtn.revertAnimation(() -> {
+                signUpBtn.setText(getString(R.string.sign_up_now));
+                return null;
+            });
+        } else {
+            signUpBtn.doneLoadingAnimation(
+                    R.color.colorTheme,
+                    BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+            openMainActivity();
+        }
+        setInputStatus(true);
+    }
+
+    @Override
+    public void handleError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void openMainActivity() {
+        ToastUtil.getInstance(getContext()).shortToast("登录成功");
+    }
+
+    private void setInputStatus(boolean flag) {
+        phoneView.setFocusable(flag);
+        phoneView.setFocusableInTouchMode(flag);
+        passwordView.setFocusable(flag);
+        passwordView.setFocusableInTouchMode(flag);
+        codeView.setFocusable(flag);
+        codeView.setFocusableInTouchMode(flag);
+    }
 }

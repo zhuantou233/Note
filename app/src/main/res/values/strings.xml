@@ -43,4 +43,6 @@
     <string name="sign_up_account">账号注册</string>
     <string name="reset_password">重置密码</string>
     <string name="password_confirm">确认密码</string>
+    <string name="get_code_failed">请求验证码失败，请检查网络</string>
+    <string name="sign_in_failed">登录失败</string>
 </resources>

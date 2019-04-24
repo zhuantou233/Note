@@ -5,4 +5,5 @@ package com.tao.note.ui.login.signinwithcode;
  * Package name: com.tao.note.ui.login.signinwithcode
  */
 public interface SignInWithCodeNavigator {
+    void goBack();
 }

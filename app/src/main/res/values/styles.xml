@@ -50,6 +50,14 @@
         <item name="android:layout_marginTop">@dimen/margin_tiny</item>
     </style>
 
+    <style name="TextStyle.BottomDialog">
+        <item name="android:padding">@dimen/padding_medium</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="InputFormStyle">
         <item name="android:layout_height">@dimen/input_form_height</item>
         <item name="android:layout_marginBottom">@dimen/margin_special</item>

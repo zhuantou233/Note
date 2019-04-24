@@ -50,7 +50,7 @@ public class BaseApplication extends Application implements HasActivityInjector 
                 .application(this)
                 .build()
                 .inject(this);
-        Bmob.initialize(this, Constants.BMOB_APPID);
+        Bmob.initialize(this, BuildConfig.API_KEY);
 
         AndroidNetworking.initialize(getApplicationContext());
         if (BuildConfig.DEBUG) {

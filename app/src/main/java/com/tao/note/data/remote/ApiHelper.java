@@ -1,5 +1,7 @@
 package com.tao.note.data.remote;
 
+import io.reactivex.Observable;
+
 import dagger.Provides;
 
 /**
@@ -7,5 +9,11 @@ import dagger.Provides;
  * Package name: com.tao.note.data.remote
  */
 public interface ApiHelper {
+    Observable<Boolean> doRequestVerCode(String phone);
+
+    Observable<Boolean> doSignUp(String phone, String password, String code);
+
+    Observable<Boolean> doSignIn(String phone, String password);
+
     ApiHeader getApiHeader();
 }

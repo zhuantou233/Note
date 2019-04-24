@@ -6,4 +6,12 @@ package com.tao.note.ui.login.signup;
  */
 public interface SignUpNavigator {
     void goBack();
+
+    void requestVerCode();
+
+    void signUp();
+
+    void handleError(Throwable throwable);
+
+    void openMainActivity();
 }

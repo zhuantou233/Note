@@ -1,7 +1,9 @@
 package com.tao.note.di.builder;
 
 import com.tao.note.ui.login.LoginActivity;
+import com.tao.note.ui.login.bottomdialog.ResetDialogProvider;
 import com.tao.note.ui.login.signin.SignInFragmentProvider;
+import com.tao.note.ui.login.signinwithcode.SignInWithCodeFragmentProvider;
 import com.tao.note.ui.login.signup.SignUpFragmentProvider;
 import com.tao.note.ui.splash.SplashActivity;
 
@@ -23,7 +25,9 @@ public abstract class ActivityBuilder {
 //
     @ContributesAndroidInjector(modules = {
             SignInFragmentProvider.class,
-            SignUpFragmentProvider.class
+            SignUpFragmentProvider.class,
+            ResetDialogProvider.class,
+            SignInWithCodeFragmentProvider.class
     })
     abstract LoginActivity bindLoginActivity();
 

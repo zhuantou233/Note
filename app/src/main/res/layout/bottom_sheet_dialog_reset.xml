@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tao.note.ui.login.bottomdialog.ResetViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/forget_psw_bottom_sheet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="50dp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <TextView
+            android:id="@+id/bottom_sheet_forget_psw"
+            style="@style/TextStyle.BottomDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_textview_background_color"
+            android:onClick="@{()->viewModel.onResetPasswordClick()}"
+            android:text="@string/find_psw" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/LightGrey" />
+
+        <TextView
+            android:id="@+id/bottom_sheet_sign_in"
+            style="@style/TextStyle.BottomDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_textview_background_color"
+            android:onClick="@{()->viewModel.onSignInWithCodeClick()}"
+            android:text="@string/verification_code_sign_in" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@color/LightGrey" />
+
+        <TextView
+            android:id="@+id/bottom_sheet_cancel"
+            style="@style/TextStyle.BottomDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_textview_background_color"
+            android:onClick="@{()->viewModel.onCancelClick()}"
+            android:text="@string/cancel" />
+    </LinearLayout>
+
+</layout>
