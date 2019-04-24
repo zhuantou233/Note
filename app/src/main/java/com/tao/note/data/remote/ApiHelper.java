@@ -15,5 +15,9 @@ public interface ApiHelper {
 
     Observable<Boolean> doSignIn(String phone, String password);
 
+    Observable<Boolean> doSignInWithCode(String phone, String code);
+
+    Observable<Boolean> doResetPassword(String phone, String password, String code);
+
     ApiHeader getApiHeader();
 }

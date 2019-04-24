@@ -6,4 +6,12 @@ package com.tao.note.ui.login.signinwithcode;
  */
 public interface SignInWithCodeNavigator {
     void goBack();
+
+    void requestVerCode();
+
+    void signIn();
+
+    void handleError(Throwable throwable);
+
+    void openMainActivity();
 }

@@ -9,11 +9,12 @@ import com.tao.note.utils.rx.SchedulerProvider;
  * Package name: com.tao.note.ui.login.signup
  */
 public class SignUpViewModel extends BaseViewModel<SignUpNavigator> {
+
+    private boolean result = false;
+
     public SignUpViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
-
-    private boolean result = false;
 
     public void onNavBackClick() {
         getNavigator().goBack();

@@ -15,6 +15,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 import dagger.Provides;
 import io.reactivex.Observable;
 import kotlin.Unit;
@@ -32,6 +33,7 @@ public class AppApiHelper implements ApiHelper {
     @Inject
     public AppApiHelper(ApiHeader apiHeader) {
         mApiHeader = apiHeader;
+        L.init("AppApiHelper");
     }
 
     @Override
@@ -82,6 +84,40 @@ public class AppApiHelper implements ApiHelper {
                     result = true;
                 } else {
                     L.i("登录失败：" + e.getErrorCode() + "-" + e.getMessage() + "\n");
+                    result = false;
+                }
+            }
+        });
+        return Observable.just(result);
+    }
+
+    @Override
+    public Observable<Boolean> doSignInWithCode(String phone, String code) {
+        BmobUser.signOrLoginByMobilePhone(phone, code, new LogInListener<MyUser>() {
+            @Override
+            public void done(MyUser myUser, BmobException e) {
+                if (e == null) {
+                    L.i("登录成功");
+                    result = true;
+                } else {
+                    L.i("登录失败：" + e.getErrorCode() + "-" + e.getMessage() + "\n");
+                    result = false;
+                }
+            }
+        });
+        return Observable.just(result);
+    }
+
+    @Override
+    public Observable<Boolean> doResetPassword(String phone, String password, String code) {
+        BmobUser.resetPasswordBySMSCode(code, password, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    L.i("重置成功");
+                    result = true;
+                } else {
+                    L.i("重置失败：" + e.getErrorCode() + "-" + e.getMessage());
                     result = false;
                 }
             }

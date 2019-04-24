@@ -19,6 +19,7 @@ import com.tao.note.R;
 import com.tao.note.ViewModelProviderFactory;
 import com.tao.note.databinding.BottomSheetDialogResetBinding;
 import com.tao.note.ui.base.BaseDialog;
+import com.tao.note.ui.login.resetpassword.ResetPasswordFragment;
 import com.tao.note.ui.login.signinwithcode.SignInWithCodeFragment;
 import com.tao.note.utils.ToastUtil;
 
@@ -93,6 +94,14 @@ public class ResetDialog extends BaseDialog implements ResetCallback {
 
     @Override
     public void showResetPasswordFragment() {
-        ToastUtil.getInstance(getContext()).shortToast("ResetPassword");
+        if (getFragmentManager() != null &&
+                getFragmentManager().findFragmentByTag(ResetPasswordFragment.TAG) == null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                    .add(R.id.root_view, ResetPasswordFragment.newInstance(), ResetPasswordFragment.TAG)
+                    .commit();
+        }
     }
 }

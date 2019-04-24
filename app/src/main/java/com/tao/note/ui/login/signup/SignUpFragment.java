@@ -77,7 +77,7 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpVi
         phoneView = mFragmentSignUpBinding.userPhoneNumber;
         passwordView = mFragmentSignUpBinding.userPassword;
         codeView = mFragmentSignUpBinding.userVerificationCode;
-        TextInputLayout passwordTI = mFragmentSignUpBinding.tiInput;
+        TextInputLayout passwordTI = mFragmentSignUpBinding.inputLayout;
         passwordView.addTextChangedListener(new MyPasswordWatcher(passwordTI));
         signUpBtn = mFragmentSignUpBinding.phoneSignUpButton;
     }

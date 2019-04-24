@@ -3,6 +3,7 @@ package com.tao.note;
 import com.tao.note.data.DataManager;
 import com.tao.note.ui.login.LoginViewModel;
 import com.tao.note.ui.login.bottomdialog.ResetViewModel;
+import com.tao.note.ui.login.resetpassword.ResetPasswordViewModel;
 import com.tao.note.ui.login.signin.SignInViewModel;
 import com.tao.note.ui.login.signinwithcode.SignInWithCodeViewModel;
 import com.tao.note.ui.login.signup.SignUpViewModel;
@@ -57,6 +58,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(SignInWithCodeViewModel.class)) {
             //noinspection unchecked
             return (T) new SignInWithCodeViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(ResetPasswordViewModel.class)) {
+            //noinspection unchecked
+            return (T) new ResetPasswordViewModel(dataManager, schedulerProvider);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

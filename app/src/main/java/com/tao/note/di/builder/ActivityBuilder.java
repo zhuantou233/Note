@@ -2,6 +2,7 @@ package com.tao.note.di.builder;
 
 import com.tao.note.ui.login.LoginActivity;
 import com.tao.note.ui.login.bottomdialog.ResetDialogProvider;
+import com.tao.note.ui.login.resetpassword.ResetPasswordFragmentProvider;
 import com.tao.note.ui.login.signin.SignInFragmentProvider;
 import com.tao.note.ui.login.signinwithcode.SignInWithCodeFragmentProvider;
 import com.tao.note.ui.login.signup.SignUpFragmentProvider;
@@ -27,7 +28,8 @@ public abstract class ActivityBuilder {
             SignInFragmentProvider.class,
             SignUpFragmentProvider.class,
             ResetDialogProvider.class,
-            SignInWithCodeFragmentProvider.class
+            SignInWithCodeFragmentProvider.class,
+            ResetPasswordFragmentProvider.class
     })
     abstract LoginActivity bindLoginActivity();
 

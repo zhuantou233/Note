@@ -57,6 +57,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<Boolean> doSignInWithCode(String phone, String code) {
+        return mApiHelper.doSignInWithCode(phone, code);
+    }
+
+    @Override
+    public Observable<Boolean> doResetPassword(String phone, String password, String code) {
+        return mApiHelper.doResetPassword(phone, password, code);
+    }
+
+    @Override
     public ApiHeader getApiHeader() {
         return mApiHelper.getApiHeader();
     }

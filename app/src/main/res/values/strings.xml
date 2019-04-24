@@ -31,11 +31,13 @@
     <string name="cancel">取消</string>
     <string name="login_with_psw">密码登录</string>
     <string name="psw_can_not_be_null">密码不能为空</string>
+    <string name="psw_is_different">密码不一致</string>
     <string name="phone_can_not_be_null">手机号不能为空</string>
     <string name="phone_invalidate">手机号格式不正确</string>
     <string name="code_can_not_be_null">验证码不能为空</string>
     <string name="no_network">网络已断开</string>
     <string name="sign_up_fail">注册失败</string>
+    <string name="reset_password_fail">重置密码失败</string>
     <string name="account_psw_error">账号或密码错误</string>
     <string name="account_code_error">账号或验证码错误</string>
     <string name="phone_reg">^((1[345][0-9])|(16[56])|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\\d{8}$</string>
@@ -43,6 +45,6 @@
     <string name="sign_up_account">账号注册</string>
     <string name="reset_password">重置密码</string>
     <string name="password_confirm">确认密码</string>
-    <string name="get_code_failed">请求验证码失败，请检查网络</string>
+    <string name="get_code_failed">请求验证码失败,请检查网络</string>
     <string name="sign_in_failed">登录失败</string>
 </resources>

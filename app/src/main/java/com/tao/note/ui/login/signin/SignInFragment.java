@@ -75,7 +75,7 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding, SignInVi
         mFragmentSignInBinding = getViewDataBinding();
         phoneView = mFragmentSignInBinding.userPhoneNumber;
         passwordView = mFragmentSignInBinding.userPassword;
-        TextInputLayout passwordTI = mFragmentSignInBinding.tiInput;
+        TextInputLayout passwordTI = mFragmentSignInBinding.inputLayout;
         passwordView.addTextChangedListener(new MyPasswordWatcher(passwordTI));
         signInBtn = mFragmentSignInBinding.phoneSignInButton;
     }

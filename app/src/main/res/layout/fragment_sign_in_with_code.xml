@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.tao.note.ui.login.LoginActivity">
 
     <data>
 
@@ -49,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/user_phone_number"
                         style="@style/InputFormNumStyle"
                         android:layout_width="match_parent"
@@ -76,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/user_verification_code"
                         style="@style/InputFormNumStyle"
                         android:layout_width="match_parent"
@@ -92,6 +94,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="@dimen/margin_special"
                     android:background="@drawable/button_user_modify"
+                    android:onClick="@{()->viewModel.onRequestVerCodeClick()}"
                     android:text="@string/get_verification_code"
                     android:textColor="@color/colorGrey"
                     android:textStyle="normal" />
@@ -104,6 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:onClick="@{()->viewModel.onSignInClick()}"
                 android:text="@string/sign_in"
                 app:finalCornerAngle="50dp"
                 app:initialCornerAngle="50dp"

@@ -5,4 +5,13 @@ package com.tao.note.ui.login.resetpassword;
  * Package name: com.tao.note.ui.login.resetpassword
  */
 public interface ResetPasswordNavigator {
+    void goBack();
+
+    void requestVerCode();
+
+    void confirmReset();
+
+    void handleError(Throwable throwable);
+
+    void openMainActivity();
 }
