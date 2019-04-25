@@ -15,41 +15,47 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:background="@color/colorTheme"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/iv_profile_pic"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="@dimen/margin_small"
-            fresco:actualImageScaleType="focusCrop"
-            fresco:backgroundImage="@android:color/holo_blue_light"
-            fresco:placeholderImage="@drawable/ic_default_avatar_name"
-            fresco:placeholderImageScaleType="fitCenter"
-            fresco:roundAsCircle="true" />
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_tiny"
+            android:layout_marginStart="@dimen/margin_special"
             android:layout_marginTop="@dimen/margin_small"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_medium">
 
-            <TextView
-                android:id="@+id/tv_name"
-                style="@style/TextStyle.NavHeaderName"
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/iv_profile_pic"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                fresco:actualImageScaleType="focusCrop"
+                fresco:backgroundImage="@android:color/holo_blue_light"
+                fresco:placeholderImage="@drawable/ic_default_avatar_name"
+                fresco:placeholderImageScaleType="fitCenter"
+                fresco:roundAsCircle="true" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/username" />
+                android:layout_marginStart="@dimen/margin_tiny"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_account_type"
-                style="@style/TextStyle.NavHeaderType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_special"
-                android:text="@string/account_type" />
+                <TextView
+                    android:id="@+id/tv_name"
+                    style="@style/TextStyle.NavHeaderName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/username" />
+
+                <TextView
+                    android:id="@+id/tv_account_type"
+                    style="@style/TextStyle.NavHeaderType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_special"
+                    android:text="@string/account_type" />
+            </LinearLayout>
         </LinearLayout>
 
 

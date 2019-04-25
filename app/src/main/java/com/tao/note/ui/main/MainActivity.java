@@ -31,6 +31,7 @@ import com.tao.note.ui.login.LoginActivity;
 
 import javax.inject.Inject;
 
+import cn.bmob.v3.datatype.BmobFile;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
@@ -186,8 +187,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mDrawer.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         setupNavMenu();
-
-//        mMainViewModel.onNavMenuCreated();
+        mMainViewModel.onNavMenuCreated();
     }
 
     private void setupNavMenu() {

@@ -32,7 +32,11 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getCurrentUserName() {
-        return user == null ? AppConstants.DEFAULT_USER_NAME : user.getNickName();
+        if (user == null || user.getNickName() == null) {
+            return AppConstants.DEFAULT_USER_NAME;
+        } else {
+            return user.getNickName();
+        }
     }
 
     @Override
