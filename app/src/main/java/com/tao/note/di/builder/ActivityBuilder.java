@@ -6,6 +6,7 @@ import com.tao.note.ui.login.resetpassword.ResetPasswordFragmentProvider;
 import com.tao.note.ui.login.signin.SignInFragmentProvider;
 import com.tao.note.ui.login.signinwithcode.SignInWithCodeFragmentProvider;
 import com.tao.note.ui.login.signup.SignUpFragmentProvider;
+import com.tao.note.ui.main.MainActivity;
 import com.tao.note.ui.splash.SplashActivity;
 
 import dagger.Module;
@@ -33,12 +34,9 @@ public abstract class ActivityBuilder {
     })
     abstract LoginActivity bindLoginActivity();
 
-    //
-//    @ContributesAndroidInjector(modules = {
-//            AboutFragmentProvider.class,
-//            RateUsDialogProvider.class})
-//    abstract MainActivity bindMainActivity();
-//
+    @ContributesAndroidInjector
+    abstract MainActivity bindMainActivity();
+
     @ContributesAndroidInjector
     abstract SplashActivity bindSplashActivity();
 }

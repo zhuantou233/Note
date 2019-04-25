@@ -1,5 +1,6 @@
 package com.tao.note.ui.login.signin;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.tao.note.ui.base.BaseFragment;
 import com.tao.note.ui.custom.MyPasswordWatcher;
 import com.tao.note.ui.login.bottomdialog.ResetDialog;
 import com.tao.note.ui.login.signup.SignUpFragment;
+import com.tao.note.ui.main.MainActivity;
 import com.tao.note.utils.ToastUtil;
 import com.tao.note.utils.Util;
 
@@ -100,23 +102,13 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding, SignInVi
         }
         setInputStatus(false);
         signInBtn.startAnimation(() -> null);
-        if (!mSignInViewModel.signIn(phone, password)) {
-            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.sign_in_failed));
-            signInBtn.revertAnimation(() -> {
-                signInBtn.setText(getString(R.string.sign_in));
-                return null;
-            });
-        } else {
-            signInBtn.doneLoadingAnimation(
-                    R.color.colorTheme,
-                    BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
-            openMainActivity();
-        }
-        setInputStatus(true);
+        mSignInViewModel.signIn(phone, password);
     }
 
     @Override
     public void showSignUpFragment() {
+        phoneView.setError(null);
+        passwordView.setError(null);
         if (getFragmentManager() != null &&
                 getFragmentManager().findFragmentByTag(SignUpFragment.TAG) == null) {
             getFragmentManager()
@@ -130,17 +122,29 @@ public class SignInFragment extends BaseFragment<FragmentSignInBinding, SignInVi
 
     @Override
     public void showBottomSheetDialog() {
+        phoneView.setError(null);
+        passwordView.setError(null);
         ResetDialog.newInstance().show(getFragmentManager());
     }
 
     @Override
     public void handleError(Throwable throwable) {
-
+        setInputStatus(true);
+        ToastUtil.getInstance(getContext()).shortToast(getString(R.string.account_psw_error));
+        signInBtn.revertAnimation(() -> {
+            signInBtn.setText(getString(R.string.sign_in));
+            return null;
+        });
     }
 
     @Override
     public void openMainActivity() {
-        ToastUtil.getInstance(getContext()).shortToast("登录成功");
+        signInBtn.doneLoadingAnimation(
+                R.color.colorTheme,
+                BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+        Intent intent = MainActivity.newIntent(getContext());
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void setInputStatus(boolean flag) {

@@ -16,6 +16,7 @@ import com.tao.note.databinding.ActivityLoginBinding;
 import com.tao.note.ui.base.BaseActivity;
 import com.tao.note.ui.login.signin.SignInFragment;
 import com.tao.note.ui.login.signup.SignUpFragment;
+import com.tao.note.ui.main.MainActivity;
 
 import java.util.List;
 
@@ -121,7 +122,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void openMainActivity() {
-
+        Intent intent = MainActivity.newIntent(LoginActivity.this);
+        startActivity(intent);
+        finish();
     }
 
 }

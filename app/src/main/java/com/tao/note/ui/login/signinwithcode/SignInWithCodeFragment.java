@@ -1,6 +1,7 @@
 package com.tao.note.ui.login.signinwithcode;
 
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.tao.note.databinding.FragmentSignUpBinding;
 import com.tao.note.ui.base.BaseFragment;
 import com.tao.note.ui.custom.MyCountDownTimer;
 import com.tao.note.ui.login.signup.SignUpViewModel;
+import com.tao.note.ui.main.MainActivity;
 import com.tao.note.utils.ToastUtil;
 import com.tao.note.utils.Util;
 
@@ -101,9 +103,7 @@ public class SignInWithCodeFragment extends BaseFragment<FragmentSignInWithCodeB
                 60000,
                 1000,
                 mFragmentSignInWithCodeBinding.getVerificationCodeBtn).start();
-        if (!mSignInWithCodeViewModel.requestVerCode(phone)) {
-            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.get_code_failed));
-        }
+        mSignInWithCodeViewModel.requestVerCode(phone);
     }
 
     @Override
@@ -126,29 +126,27 @@ public class SignInWithCodeFragment extends BaseFragment<FragmentSignInWithCodeB
         }
         setInputStatus(false);
         signInBtn.startAnimation(() -> null);
-        if (!mSignInWithCodeViewModel.signIn(phone, code)) {
-            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.sign_in_failed));
-            signInBtn.revertAnimation(() -> {
-                signInBtn.setText(getString(R.string.sign_in));
-                return null;
-            });
-        } else {
-            signInBtn.doneLoadingAnimation(
-                    R.color.colorTheme,
-                    BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
-            openMainActivity();
-        }
-        setInputStatus(true);
+        mSignInWithCodeViewModel.signIn(phone, code);
     }
 
     @Override
     public void handleError(Throwable throwable) {
-
+        setInputStatus(true);
+        ToastUtil.getInstance(getContext()).shortToast(getString(R.string.account_code_error));
+        signInBtn.revertAnimation(() -> {
+            signInBtn.setText(getString(R.string.sign_in));
+            return null;
+        });
     }
 
     @Override
     public void openMainActivity() {
-
+        signInBtn.doneLoadingAnimation(
+                R.color.colorTheme,
+                BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+        Intent intent = MainActivity.newIntent(getContext());
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void setInputStatus(boolean flag) {

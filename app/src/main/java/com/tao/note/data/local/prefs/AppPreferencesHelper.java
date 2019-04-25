@@ -21,7 +21,6 @@ import cn.bmob.v3.listener.UpdateListener;
  * Package name: com.tao.note.data.local.prefs
  */
 public class AppPreferencesHelper implements PreferencesHelper {
-    private static final String TAG = "AppPreferencesHelper";
     private final SharedPreferences mPrefs;
     private MyUser user;
 
@@ -29,7 +28,6 @@ public class AppPreferencesHelper implements PreferencesHelper {
     public AppPreferencesHelper(Context context, @PreferenceInfo String prefFileName) {
         mPrefs = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
         user = BmobUser.getCurrentUser(MyUser.class);
-        L.init(TAG);
     }
 
     @Override

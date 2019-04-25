@@ -1,10 +1,7 @@
 package com.tao.note.data.remote;
 
-import com.tao.note.R;
 import com.tao.note.data.model.db.MyUser;
 import com.tao.note.utils.L;
-
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -13,13 +10,8 @@ import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
-import cn.bmob.v3.listener.QueryListener;
-import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import dagger.Provides;
 import io.reactivex.Observable;
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
 
 /**
  * Created by Tao Zhou on 2019/4/17
@@ -28,101 +20,52 @@ import kotlin.jvm.functions.Function0;
 @Singleton
 public class AppApiHelper implements ApiHelper {
     private ApiHeader mApiHeader;
-    private boolean result = false;
 
     @Inject
     public AppApiHelper(ApiHeader apiHeader) {
         mApiHeader = apiHeader;
-        L.init("AppApiHelper");
     }
 
     @Override
-    public Observable<Boolean> doRequestVerCode(String phone) {
-        // 这里有点问题，应该使用REST API通过RxAndroid进行请求
-        BmobSMS.requestSMSCode(phone, "", new QueryListener<Integer>() {
-            @Override
-            public void done(Integer smsId, BmobException e) {
-                if (e == null) {
-                    L.i("发送验证码成功，短信ID：" + smsId + "\n");
-                    result = true;
-                } else {
-                    L.i("发送验证码失败：" + e.getErrorCode() + "-" + e.getMessage() + "\n");
-                    result = false;
-                }
-            }
-        });
-        return Observable.just(result);
+    public Observable<Integer> doRequestVerCode(String phone) {
+        return BmobSMS.requestSMSCodeObservable(phone, "");
     }
 
     @Override
-    public Observable<Boolean> doSignUp(String phone, String password, String code) {
+    public Observable<MyUser> doSignUp(String phone, String password, String code) {
         MyUser user = new MyUser();
         user.setMobilePhoneNumber(phone);
         user.setPassword(password);
-        user.signOrLogin(code, new SaveListener<MyUser>() {
-            @Override
-            public void done(MyUser myUser, BmobException e) {
-                if (e == null) {
-                    L.i("发送验证码成功");
-                    result = true;
-                } else {
-                    L.i("发送验证码失败：" + e.getErrorCode() + "-" + e.getMessage() + "\n");
-                    result = false;
-                }
-            }
-        });
-        return Observable.just(result);
+        return user.signOrLoginObservable(MyUser.class, code);
     }
 
     @Override
-    public Observable<Boolean> doSignIn(String phone, String password) {
-        BmobUser.loginByAccount(phone, password, new LogInListener<MyUser>() {
-            @Override
-            public void done(MyUser myUser, BmobException e) {
-                if (e == null) {
-                    L.i("登录成功");
-                    result = true;
-                } else {
-                    L.i("登录失败：" + e.getErrorCode() + "-" + e.getMessage() + "\n");
-                    result = false;
-                }
-            }
-        });
-        return Observable.just(result);
+    public Observable<MyUser> doSignIn(String phone, String password) {
+        return BmobUser.loginByAccountObservable(MyUser.class, phone, password);
     }
 
     @Override
-    public Observable<Boolean> doSignInWithCode(String phone, String code) {
-        BmobUser.signOrLoginByMobilePhone(phone, code, new LogInListener<MyUser>() {
+    public Observable<MyUser> doSignInWithCode(String phone, String code) {
+        return Observable.create(emitter -> BmobUser.loginBySMSCode(phone, code, new LogInListener<MyUser>() {
             @Override
             public void done(MyUser myUser, BmobException e) {
                 if (e == null) {
-                    L.i("登录成功");
-                    result = true;
+                    emitter.onNext(myUser);
                 } else {
-                    L.i("登录失败：" + e.getErrorCode() + "-" + e.getMessage() + "\n");
-                    result = false;
+                    emitter.onError(e);
                 }
             }
-        });
-        return Observable.just(result);
+        }));
     }
 
     @Override
-    public Observable<Boolean> doResetPassword(String phone, String password, String code) {
-        BmobUser.resetPasswordBySMSCode(code, password, new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null) {
-                    L.i("重置成功");
-                    result = true;
-                } else {
-                    L.i("重置失败：" + e.getErrorCode() + "-" + e.getMessage());
-                    result = false;
-                }
-            }
-        });
-        return Observable.just(result);
+    public Observable<BmobException> doResetPassword(String phone, String password, String code) {
+        return BmobUser.resetPasswordBySMSCodeObservable(code, password);
+    }
+
+    @Override
+    public void doLogout() {
+        BmobUser.logOut();
     }
 
     @Override

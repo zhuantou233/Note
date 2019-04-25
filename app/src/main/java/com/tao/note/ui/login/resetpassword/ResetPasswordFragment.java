@@ -1,5 +1,6 @@
 package com.tao.note.ui.login.resetpassword;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.tao.note.databinding.FragmentResetPasswordBinding;
 import com.tao.note.ui.base.BaseFragment;
 import com.tao.note.ui.custom.MyCountDownTimer;
 import com.tao.note.ui.custom.MyPasswordWatcher;
+import com.tao.note.ui.main.MainActivity;
 import com.tao.note.utils.ToastUtil;
 import com.tao.note.utils.Util;
 
@@ -107,9 +109,7 @@ public class ResetPasswordFragment extends BaseFragment<FragmentResetPasswordBin
                 60000,
                 1000,
                 mFragmentResetPasswordBinding.getVerificationCodeBtn).start();
-        if (!mResetPasswordViewModel.requestVerCode(phone)) {
-            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.get_code_failed));
-        }
+        mResetPasswordViewModel.requestVerCode(phone);
     }
 
     @Override
@@ -149,29 +149,27 @@ public class ResetPasswordFragment extends BaseFragment<FragmentResetPasswordBin
         }
         setInputStatus(false);
         confirmBtn.startAnimation(() -> null);
-        if (!mResetPasswordViewModel.confirmReset(phone, password, code)) {
-            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.reset_password_fail));
-            confirmBtn.revertAnimation(() -> {
-                confirmBtn.setText(getString(R.string.reset_password));
-                return null;
-            });
-        } else {
-            confirmBtn.doneLoadingAnimation(
-                    R.color.colorTheme,
-                    BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
-            openMainActivity();
-        }
-        setInputStatus(true);
+        mResetPasswordViewModel.confirmReset(phone, password, code);
     }
 
     @Override
     public void handleError(Throwable throwable) {
-
+        setInputStatus(true);
+        ToastUtil.getInstance(getContext()).shortToast(getString(R.string.reset_password_fail));
+        confirmBtn.revertAnimation(() -> {
+            confirmBtn.setText(getString(R.string.reset_password));
+            return null;
+        });
     }
 
     @Override
     public void openMainActivity() {
-
+        confirmBtn.doneLoadingAnimation(
+                R.color.colorTheme,
+                BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+        Intent intent = MainActivity.newIntent(getContext());
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void setInputStatus(boolean flag) {

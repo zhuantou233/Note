@@ -2,7 +2,7 @@ package com.tao.note.di.component;
 
 import android.app.Application;
 
-import com.tao.note.BaseApplication;
+import com.tao.note.NoteApp;
 import com.tao.note.di.builder.ActivityBuilder;
 import com.tao.note.di.module.AppModule;
 
@@ -20,7 +20,7 @@ import dagger.android.AndroidInjectionModule;
 @Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class})
 public interface AppComponent {
 
-    void inject(BaseApplication app);
+    void inject(NoteApp app);
 
     @Component.Builder
     interface Builder {

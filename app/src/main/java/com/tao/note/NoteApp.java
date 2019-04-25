@@ -5,8 +5,8 @@ import android.app.Application;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tao.note.di.component.DaggerAppComponent;
-import com.tao.note.utils.Constants;
 
 import javax.inject.Inject;
 
@@ -17,12 +17,12 @@ import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 
-public class BaseApplication extends Application implements HasActivityInjector {
+public class NoteApp extends Application implements HasActivityInjector {
 
-//    private static BaseApplication INSTANCE = null;
+//    private static NoteApp INSTANCE = null;
 //    private static Context context;
 //
-//    public static BaseApplication getInstance() {
+//    public static NoteApp getInstance() {
 //        return INSTANCE;
 //    }
 //
@@ -52,10 +52,14 @@ public class BaseApplication extends Application implements HasActivityInjector 
                 .inject(this);
         Bmob.initialize(this, BuildConfig.API_KEY);
 
+        Fresco.initialize(this);
+
         AndroidNetworking.initialize(getApplicationContext());
+
         if (BuildConfig.DEBUG) {
             AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
         }
+
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(
                         new CalligraphyConfig.Builder()

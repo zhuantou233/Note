@@ -13,4 +13,9 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
         super(dataManager, schedulerProvider);
     }
 
+    public void onLogout() {
+        setIsLoading(true);
+        getDataManager().doLogout();
+        getNavigator().openLoginActivity();
+    }
 }

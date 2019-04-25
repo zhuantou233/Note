@@ -1,8 +1,15 @@
 package com.tao.note.ui.login.signin;
 
 import com.tao.note.data.DataManager;
+import com.tao.note.data.model.db.MyUser;
 import com.tao.note.ui.base.BaseViewModel;
+import com.tao.note.utils.L;
 import com.tao.note.utils.rx.SchedulerProvider;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DefaultObserver;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * Created by Tao Zhou on 2019/4/22
@@ -12,8 +19,6 @@ public class SignInViewModel extends BaseViewModel<SignInNavigator> {
     public SignInViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
-
-    private boolean result = false;
 
     public void onSignInClick() {
         getNavigator().signIn();
@@ -27,19 +32,31 @@ public class SignInViewModel extends BaseViewModel<SignInNavigator> {
         getNavigator().showBottomSheetDialog();
     }
 
-    public boolean signIn(String phone, String password) {
+    public void signIn(String phone, String password) {
         setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
+        getDataManager()
                 .doSignIn(phone, password)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(aBoolean -> {
-                    setIsLoading(false);
-                    result = aBoolean;
-                }, throwable -> {
-                    setIsLoading(false);
-                    getNavigator().handleError(throwable);
-                }));
-        return result;
+                .subscribe(new DefaultObserver<MyUser>() {
+                    @Override
+                    public void onNext(MyUser myUser) {
+                        setIsLoading(false);
+                        L.i("登录成功");
+                        getNavigator().openMainActivity();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        setIsLoading(false);
+                        L.i("登录失败：" + e.getMessage() + "\n");
+                        getNavigator().handleError(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

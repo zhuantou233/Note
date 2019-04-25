@@ -1,5 +1,6 @@
 package com.tao.note.ui.login.signup;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.tao.note.databinding.FragmentSignUpBinding;
 import com.tao.note.ui.base.BaseFragment;
 import com.tao.note.ui.custom.MyCountDownTimer;
 import com.tao.note.ui.custom.MyPasswordWatcher;
+import com.tao.note.ui.main.MainActivity;
 import com.tao.note.utils.ToastUtil;
 import com.tao.note.utils.Util;
 
@@ -103,9 +105,7 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpVi
                 60000,
                 1000,
                 mFragmentSignUpBinding.getVerificationCodeBtn).start();
-        if (!mSignUpViewModel.requestVerCode(phone)) {
-            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.get_code_failed));
-        }
+        mSignUpViewModel.requestVerCode(phone);
     }
 
     @Override
@@ -134,29 +134,27 @@ public class SignUpFragment extends BaseFragment<FragmentSignUpBinding, SignUpVi
         }
         setInputStatus(false);
         signUpBtn.startAnimation(() -> null);
-        if (!mSignUpViewModel.signUp(phone, password, code)) {
-            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.sign_up_fail));
-            signUpBtn.revertAnimation(() -> {
-                signUpBtn.setText(getString(R.string.sign_up_now));
-                return null;
-            });
-        } else {
-            signUpBtn.doneLoadingAnimation(
-                    R.color.colorTheme,
-                    BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
-            openMainActivity();
-        }
-        setInputStatus(true);
+        mSignUpViewModel.signUp(phone, password, code);
     }
 
     @Override
     public void handleError(Throwable throwable) {
-
+        setInputStatus(true);
+        ToastUtil.getInstance(getContext()).shortToast(getString(R.string.sign_up_fail));
+        signUpBtn.revertAnimation(() -> {
+            signUpBtn.setText(getString(R.string.sign_up_now));
+            return null;
+        });
     }
 
     @Override
     public void openMainActivity() {
-        ToastUtil.getInstance(getContext()).shortToast("登录成功");
+        signUpBtn.doneLoadingAnimation(
+                R.color.colorTheme,
+                BitmapFactory.decodeResource(getResources(), R.drawable.ic_done_white_48dp));
+        Intent intent = MainActivity.newIntent(getContext());
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void setInputStatus(boolean flag) {

@@ -1,23 +1,26 @@
 package com.tao.note.data.remote;
 
-import io.reactivex.Observable;
+import com.tao.note.data.model.db.MyUser;
 
-import dagger.Provides;
+import cn.bmob.v3.exception.BmobException;
+import io.reactivex.Observable;
 
 /**
  * Created by Tao Zhou on 2019/4/17
  * Package name: com.tao.note.data.remote
  */
 public interface ApiHelper {
-    Observable<Boolean> doRequestVerCode(String phone);
+    Observable<Integer> doRequestVerCode(String phone);
 
-    Observable<Boolean> doSignUp(String phone, String password, String code);
+    Observable<MyUser> doSignUp(String phone, String password, String code);
 
-    Observable<Boolean> doSignIn(String phone, String password);
+    Observable<MyUser> doSignIn(String phone, String password);
 
-    Observable<Boolean> doSignInWithCode(String phone, String code);
+    Observable<MyUser> doSignInWithCode(String phone, String code);
 
-    Observable<Boolean> doResetPassword(String phone, String password, String code);
+    Observable<BmobException> doResetPassword(String phone, String password, String code);
+
+    void doLogout();
 
     ApiHeader getApiHeader();
 }

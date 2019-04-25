@@ -1,122 +1,229 @@
 package com.tao.note.ui.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import android.view.View;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import cn.bmob.v3.BmobUser;
-
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.google.android.material.navigation.NavigationView;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
+import com.tao.note.BR;
 import com.tao.note.R;
-import com.tao.note.data.model.db.MyUser;
-import com.tao.note.ui.login.LoginActivity1;
+import com.tao.note.ViewModelProviderFactory;
+import com.tao.note.databinding.ActivityMainBinding;
+import com.tao.note.databinding.NavHeaderMainBinding;
+import com.tao.note.ui.base.BaseActivity;
+import com.tao.note.ui.login.LoginActivity;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    private MyUser user;
+import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_base);
-        setSupportActionBar(toolbar);
+/**
+ * Created by Tao Zhou on 2019/4/25
+ * Package name: com.tao.note.ui.main
+ */
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainNavigator, HasSupportFragmentInjector {
 
-        user = BmobUser.getCurrentUser(MyUser.class);
-        if (user == null) {
-            Intent intent = new Intent(this, LoginActivity1.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+    @Inject
+    ViewModelProviderFactory factory;
+    private ActivityMainBinding mActivityMainBinding;
+    private MainViewModel mMainViewModel;
+    private SwipePlaceHolderView mContainerView;
+    private DrawerLayout mDrawer;
+    private NavigationView mNavigationView;
+    private Toolbar mToolbar;
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                startActivity(new Intent(MainActivity.this, LoginActivity1.class));
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+    public int getBindingVariable() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public MainViewModel getViewModel() {
+        mMainViewModel = ViewModelProviders.of(this, factory).get(MainViewModel.class);
+        return mMainViewModel;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivityMainBinding = getViewDataBinding();
+        mMainViewModel.setNavigator(this);
+        setUp();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mDrawer != null) {
+            mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        Fragment fragment = fragmentManager.findFragmentByTag(AboutFragment.TAG);
+//        if (fragment == null) {
+//            super.onBackPressed();
+//        } else {
+//            onFragmentDetached(AboutFragment.TAG);
+//        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            startActivity(new Intent(MainActivity.this, LoginActivity1.class));
-            return true;
+        Drawable drawable = item.getIcon();
+        if (drawable instanceof Animatable) {
+            ((Animatable) drawable).start();
         }
-
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_cut:
+                return true;
+            case R.id.action_copy:
+                return true;
+            case R.id.action_share:
+                return true;
+            case R.id.action_delete:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+    public void handleError(Throwable throwable) {
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+    }
 
-        } else if (id == R.id.nav_slideshow) {
+    @Override
+    public void openLoginActivity() {
+        Intent intent = LoginActivity.newIntent(MainActivity.this);
+        startActivity(intent);
+        finish();
+    }
 
-        } else if (id == R.id.nav_manage) {
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
+    }
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+    public void onFragmentDetached(String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
+        if (fragment != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                    .remove(fragment)
+                    .commitNow();
+            unlockDrawer();
         }
+    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    private void setUp() {
+        mDrawer = mActivityMainBinding.drawerView;
+        mToolbar = mActivityMainBinding.toolbar;
+        mNavigationView = mActivityMainBinding.navView;
+        mContainerView = mActivityMainBinding.container;
+
+        setSupportActionBar(mToolbar);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                mDrawer,
+                mToolbar,
+                R.string.open_drawer,
+                R.string.close_drawer) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                hideKeyboard();
+            }
+        };
+        mDrawer.addDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        setupNavMenu();
+
+//        mMainViewModel.onNavMenuCreated();
+    }
+
+    private void setupNavMenu() {
+        NavHeaderMainBinding navHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(),
+                R.layout.nav_header_main, mActivityMainBinding.navView, false);
+        mActivityMainBinding.navView.addHeaderView(navHeaderMainBinding.getRoot());
+        navHeaderMainBinding.setViewModel(mMainViewModel);
+
+        mNavigationView.setNavigationItemSelectedListener(
+                item -> {
+                    mDrawer.closeDrawer(GravityCompat.START);
+                    switch (item.getItemId()) {
+                        case R.id.nav_camera:
+                            return true;
+                        case R.id.nav_gallery:
+                            return true;
+                        case R.id.nav_manage:
+                            return true;
+                        case R.id.nav_send:
+                            mMainViewModel.onLogout();
+                            return true;
+                        default:
+                            return false;
+                    }
+                });
+    }
+
+    private void unlockDrawer() {
+        if (mDrawer != null) {
+            mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }
+    }
+
+    private void lockDrawer() {
+        if (mDrawer != null) {
+            mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
     }
 }

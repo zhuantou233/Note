@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
 import io.reactivex.Observable;
 
 /**
@@ -42,28 +43,33 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Boolean> doRequestVerCode(String phone) {
+    public Observable<Integer> doRequestVerCode(String phone) {
         return mApiHelper.doRequestVerCode(phone);
     }
 
     @Override
-    public Observable<Boolean> doSignUp(String phone, String password, String code) {
+    public Observable<MyUser> doSignUp(String phone, String password, String code) {
         return mApiHelper.doSignUp(phone, password, code);
     }
 
     @Override
-    public Observable<Boolean> doSignIn(String phone, String password) {
+    public Observable<MyUser> doSignIn(String phone, String password) {
         return mApiHelper.doSignIn(phone, password);
     }
 
     @Override
-    public Observable<Boolean> doSignInWithCode(String phone, String code) {
+    public Observable<MyUser> doSignInWithCode(String phone, String code) {
         return mApiHelper.doSignInWithCode(phone, code);
     }
 
     @Override
-    public Observable<Boolean> doResetPassword(String phone, String password, String code) {
+    public Observable<BmobException> doResetPassword(String phone, String password, String code) {
         return mApiHelper.doResetPassword(phone, password, code);
+    }
+
+    @Override
+    public void doLogout() {
+        mApiHelper.doLogout();
     }
 
     @Override

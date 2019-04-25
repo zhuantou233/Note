@@ -1,8 +1,12 @@
 package com.tao.note.ui.login.signup;
 
 import com.tao.note.data.DataManager;
+import com.tao.note.data.model.db.MyUser;
 import com.tao.note.ui.base.BaseViewModel;
+import com.tao.note.utils.L;
 import com.tao.note.utils.rx.SchedulerProvider;
+
+import io.reactivex.observers.DefaultObserver;
 
 /**
  * Created by Tao Zhou on 2019/4/22
@@ -28,35 +32,58 @@ public class SignUpViewModel extends BaseViewModel<SignUpNavigator> {
         getNavigator().signUp();
     }
 
-    public boolean requestVerCode(String phone) {
+    public void requestVerCode(String phone) {
         setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
+        getDataManager()
                 .doRequestVerCode(phone)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(aBoolean -> {
-                    setIsLoading(false);
-                    result = aBoolean;
-                }, throwable -> {
-                    setIsLoading(false);
-                    getNavigator().handleError(throwable);
-                }));
-        return result;
+                .subscribe(new DefaultObserver<Integer>() {
+                    @Override
+                    public void onNext(Integer integer) {
+                        setIsLoading(false);
+                        L.i("发送验证码成功，短信ID：" + integer + "\n");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        setIsLoading(false);
+                        getNavigator().handleError(e);
+                        L.i("发送验证码失败：" + e.getMessage() + "\n");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
-    public boolean signUp(String phone, String password, String code) {
+    public void signUp(String phone, String password, String code) {
         setIsLoading(true);
-        getCompositeDisposable().add(getDataManager()
+        getDataManager()
                 .doSignUp(phone, password, code)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(aBoolean -> {
-                    setIsLoading(false);
-                    result = aBoolean;
-                }, throwable -> {
-                    setIsLoading(false);
-                    getNavigator().handleError(throwable);
-                }));
-        return result;
+                .subscribe(new DefaultObserver<MyUser>() {
+                    @Override
+                    public void onNext(MyUser myUser) {
+                        setIsLoading(false);
+                        L.i("注册成功");
+                        getNavigator().openMainActivity();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        setIsLoading(false);
+                        L.i("注册失败：" + e.getMessage() + "\n");
+                        getNavigator().handleError(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

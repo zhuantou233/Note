@@ -12,7 +12,6 @@ import com.tao.note.ViewModelProviderFactory;
 import com.tao.note.databinding.ActivitySplashBinding;
 import com.tao.note.ui.base.BaseActivity;
 import com.tao.note.ui.login.LoginActivity;
-import com.tao.note.ui.login.LoginActivity1;
 import com.tao.note.ui.main.MainActivity;
 import com.tao.note.utils.ToastUtil;
 
@@ -49,18 +48,13 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
         Intent intent = LoginActivity.newIntent(SplashActivity.this);
         startActivity(intent);
         finish();
-        ToastUtil.getInstance(this).shortToast("login status");
     }
 
     @Override
     public void openMainActivity() {
-//        Intent intent = MainActivity.newIntent(SplashActivity.this);
-//        startActivity(intent);
-//        finish();
-        Intent intent = LoginActivity.newIntent(SplashActivity.this);
+        Intent intent = MainActivity.newIntent(SplashActivity.this);
         startActivity(intent);
         finish();
-        ToastUtil.getInstance(this).shortToast("main status");
     }
 
     @Override
