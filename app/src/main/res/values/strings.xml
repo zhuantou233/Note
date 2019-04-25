@@ -42,4 +42,6 @@
     <!--Drawer-->
     <string name="open_drawer">Drawer Open</string>
     <string name="close_drawer">Drawer Close</string>
+    <string name="username">userName</string>
+    <string name="account_type">account type</string>
 </resources>

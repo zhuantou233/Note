@@ -66,6 +66,18 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="TextStyle.NavHeaderName">
+        <item name="android:textSize">@dimen/text_size_huge</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextStyle.NavHeaderType">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="InputFormStyle">
         <item name="android:layout_height">@dimen/input_form_height</item>
         <item name="android:layout_marginBottom">@dimen/margin_special</item>

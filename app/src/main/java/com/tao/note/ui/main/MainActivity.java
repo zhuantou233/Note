@@ -206,7 +206,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                             return true;
                         case R.id.nav_manage:
                             return true;
-                        case R.id.nav_send:
+                        case R.id.nav_logout:
                             mMainViewModel.onLogout();
                             return true;
                         default:

@@ -13,34 +13,45 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/bg_design"
-        android:orientation="vertical"
+        android:layout_height="130dp"
+        android:background="@color/colorTheme"
+        android:orientation="horizontal"
         android:padding="16dp">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/iv_profile_pic"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="40dp"
-            fresco:actualImageScaleType="centerInside"
-            fresco:placeholderImage="@drawable/ic_foreground"
-            fresco:roundAsCircle="true"
-            fresco:roundingBorderColor="@color/navy_blue_dark"
-            fresco:roundingBorderWidth="1dp" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="@dimen/margin_small"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:backgroundImage="@android:color/holo_blue_light"
+            fresco:placeholderImage="@drawable/ic_default_avatar_name"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:roundAsCircle="true" />
 
-        <TextView
-            android:id="@+id/tv_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="userName" />
+            android:layout_marginStart="@dimen/margin_tiny"
+            android:layout_marginTop="@dimen/margin_small"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="userEmail" />
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/TextStyle.NavHeaderName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/username" />
+
+            <TextView
+                android:id="@+id/tv_account_type"
+                style="@style/TextStyle.NavHeaderType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_special"
+                android:text="@string/account_type" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
