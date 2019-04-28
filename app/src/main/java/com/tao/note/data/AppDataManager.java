@@ -1,6 +1,7 @@
 package com.tao.note.data;
 
 import android.content.Context;
+import android.os.Environment;
 
 import com.google.gson.Gson;
 import com.tao.note.data.local.db.DBHelper;
@@ -8,6 +9,9 @@ import com.tao.note.data.local.prefs.PreferencesHelper;
 import com.tao.note.data.model.db.MyUser;
 import com.tao.note.data.remote.ApiHeader;
 import com.tao.note.data.remote.ApiHelper;
+import com.tao.note.utils.L;
+
+import java.io.File;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -15,6 +19,7 @@ import javax.inject.Singleton;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.DownloadFileListener;
 import io.reactivex.Observable;
 
 /**
@@ -86,6 +91,31 @@ public class AppDataManager implements DataManager {
     @Override
     public void setUserAsLoggedOut() {
         BmobUser.logOut();
+        setCurrentUserAvatarUrl(null);
+    }
+
+    @Override
+    public void updateUserInfo(MyUser user) {
+        BmobFile avatarFile = user.getAvatar();
+        if (avatarFile != null && getCurrentUserAvatarUrl() == null) {
+            File saveFile = new File(Environment.getExternalStorageDirectory(), avatarFile.getFilename());
+            avatarFile.download(saveFile, new DownloadFileListener() {
+                @Override
+                public void done(String s, BmobException e) {
+                    if (e == null) {
+                        setCurrentUserAvatarUrl(s);
+                        L.i("下载成功" + s);
+                    } else {
+                        L.i("下载失败: " + e.getErrorCode() + "-" + e.getMessage());
+                    }
+                }
+
+                @Override
+                public void onProgress(Integer integer, long l) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -136,5 +166,20 @@ public class AppDataManager implements DataManager {
     @Override
     public void setCurrentUserAccountType(AccountType type) {
         mPreferencesHelper.setCurrentUserAccountType(type);
+    }
+
+    @Override
+    public String getCurrentUserAccountTypeName() {
+        return mPreferencesHelper.getCurrentUserAccountTypeName();
+    }
+
+    @Override
+    public String getCurrentUserAvatarUrl() {
+        return mPreferencesHelper.getCurrentUserAvatarUrl();
+    }
+
+    @Override
+    public void setCurrentUserAvatarUrl(String avatarUrl) {
+        mPreferencesHelper.setCurrentUserAvatarUrl(avatarUrl);
     }
 }

@@ -53,7 +53,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/LightGrey" />
+                            android:background="@color/split_line_grey" />
 
                     </com.google.android.material.appbar.AppBarLayout>
 
@@ -70,8 +70,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:layout_margin="@dimen/fab_margin"
-                    android:onClick="@{()->viewModel.onLogout()}"
-                    app:srcCompat="@android:drawable/ic_dialog_email" />
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:backgroundTint="@color/colorTheme"
+                    app:srcCompat="@drawable/ic_add_white_24dp" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

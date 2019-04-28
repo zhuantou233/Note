@@ -68,6 +68,8 @@ ext {
 //    timberVersion = '4.5.1'
     lifecycleVersion = '2.0.0'
 
+    easypermissionsVersion = '3.0.0'
+
     // Test dependencies
     junitVersion = '4.12'
     espressoVersion = '3.2.0-alpha03'

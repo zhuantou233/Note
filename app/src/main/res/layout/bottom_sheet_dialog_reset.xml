@@ -26,35 +26,35 @@
             style="@style/TextStyle.BottomDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_textview_background_color"
+            android:background="?android:attr/selectableItemBackground"
             android:onClick="@{()->viewModel.onResetPasswordClick()}"
             android:text="@string/find_psw" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/LightGrey" />
+            android:background="@color/split_line_grey" />
 
         <TextView
             android:id="@+id/bottom_sheet_sign_in"
             style="@style/TextStyle.BottomDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_textview_background_color"
+            android:background="?android:attr/selectableItemBackground"
             android:onClick="@{()->viewModel.onSignInWithCodeClick()}"
             android:text="@string/verification_code_sign_in" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="6dp"
-            android:background="@color/LightGrey" />
+            android:background="@color/split_line_grey" />
 
         <TextView
             android:id="@+id/bottom_sheet_cancel"
             style="@style/TextStyle.BottomDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_textview_background_color"
+            android:background="?android:attr/selectableItemBackground"
             android:onClick="@{()->viewModel.onCancelClick()}"
             android:text="@string/cancel" />
     </LinearLayout>

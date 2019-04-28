@@ -2,6 +2,7 @@ package com.tao.note.data;
 
 import com.tao.note.data.local.db.DBHelper;
 import com.tao.note.data.local.prefs.PreferencesHelper;
+import com.tao.note.data.model.db.MyUser;
 import com.tao.note.data.remote.ApiHelper;
 
 import io.reactivex.Observable;
@@ -15,6 +16,8 @@ public interface DataManager extends DBHelper, ApiHelper, PreferencesHelper {
     Observable<Boolean> seedAppSettings();
 
     void setUserAsLoggedOut();
+
+    void updateUserInfo(MyUser user);
 
     enum LoggedInMode {
 
@@ -46,5 +49,6 @@ public interface DataManager extends DBHelper, ApiHelper, PreferencesHelper {
         public int getType() {
             return mType;
         }
+
     }
 }

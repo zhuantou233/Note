@@ -29,4 +29,10 @@ public interface PreferencesHelper {
     int getCurrentUserAccountType();
 
     void setCurrentUserAccountType(DataManager.AccountType type);
+
+    String getCurrentUserAccountTypeName();
+
+    String getCurrentUserAvatarUrl();
+
+    void setCurrentUserAvatarUrl(String avatarUrl);
 }

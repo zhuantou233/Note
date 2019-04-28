@@ -28,10 +28,10 @@ import com.tao.note.databinding.ActivityMainBinding;
 import com.tao.note.databinding.NavHeaderMainBinding;
 import com.tao.note.ui.base.BaseActivity;
 import com.tao.note.ui.login.LoginActivity;
+import com.tao.note.ui.profile.ProfileActivity;
 
 import javax.inject.Inject;
 
-import cn.bmob.v3.datatype.BmobFile;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
@@ -44,8 +44,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+
     @Inject
     ViewModelProviderFactory factory;
+
     private ActivityMainBinding mActivityMainBinding;
     private MainViewModel mMainViewModel;
     private SwipePlaceHolderView mContainerView;
@@ -93,6 +95,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        Fragment fragment = fragmentManager.findFragmentByTag(AboutFragment.TAG);
 //        if (fragment == null) {
@@ -139,6 +142,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         Intent intent = LoginActivity.newIntent(MainActivity.this);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void openProfileActivity() {
+        mDrawer.closeDrawer(GravityCompat.START);
+        Intent intent = ProfileActivity.newIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     @Override

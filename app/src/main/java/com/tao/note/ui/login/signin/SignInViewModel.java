@@ -43,6 +43,7 @@ public class SignInViewModel extends BaseViewModel<SignInNavigator> {
                     public void onNext(MyUser myUser) {
                         setIsLoading(false);
                         L.i("登录成功");
+                        getDataManager().updateUserInfo(myUser);
                         getNavigator().openMainActivity();
                     }
 

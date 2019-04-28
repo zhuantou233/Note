@@ -1,5 +1,6 @@
 package com.tao.note.data.remote;
 
+import com.tao.note.data.DataManager;
 import com.tao.note.data.model.db.MyUser;
 import com.tao.note.utils.L;
 
@@ -36,6 +37,9 @@ public class AppApiHelper implements ApiHelper {
         MyUser user = new MyUser();
         user.setMobilePhoneNumber(phone);
         user.setPassword(password);
+        user.setNickName(phone);
+        // todo 控制账号类型
+        user.setAccountType(DataManager.AccountType.ACCOUNT_TYPE_ADMIN.getType());
         return user.signOrLoginObservable(MyUser.class, code);
     }
 

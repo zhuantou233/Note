@@ -44,4 +44,9 @@
     <string name="close_drawer">Drawer Close</string>
     <string name="username">userName</string>
     <string name="account_type">account type</string>
+    <string name="profile">档案</string>
+    <string name="account">账号</string>
+    <string name="change_your_passowrd">更改您的密码</string>
+    <string name="name">名字</string>
+    <string name="avatar">头像</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.tao.note.ui.login.resetpassword;
 
 import com.tao.note.data.DataManager;
+import com.tao.note.data.model.db.MyUser;
 import com.tao.note.ui.base.BaseViewModel;
 import com.tao.note.utils.L;
 import com.tao.note.utils.rx.SchedulerProvider;
 
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import io.reactivex.observers.DefaultObserver;
 
@@ -68,6 +70,7 @@ public class ResetPasswordViewModel extends BaseViewModel<ResetPasswordNavigator
                     public void onNext(BmobException e) {
                         setIsLoading(false);
                         L.i("重置成功");
+                        getDataManager().updateUserInfo(BmobUser.getCurrentUser(MyUser.class));
                         getNavigator().openMainActivity();
                     }
 

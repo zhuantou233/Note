@@ -70,6 +70,7 @@ public class SignUpViewModel extends BaseViewModel<SignUpNavigator> {
                     public void onNext(MyUser myUser) {
                         setIsLoading(false);
                         L.i("注册成功");
+                        getDataManager().updateUserInfo(myUser);
                         getNavigator().openMainActivity();
                     }
 

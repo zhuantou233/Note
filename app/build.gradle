@@ -91,6 +91,9 @@ dependencies {
     implementation "com.mindorks.android:placeholderview:$rootProject.placeholderviewVersion"
     annotationProcessor "com.mindorks.android:placeholderview-compiler:$rootProject.placeholderviewVersion"
 
+    // easypermissions
+    implementation "pub.devrel:easypermissions:$rootProject.easypermissionsVersion"
+
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     androidTestImplementation "androidx.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"

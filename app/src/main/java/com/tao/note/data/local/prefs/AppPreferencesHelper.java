@@ -21,7 +21,11 @@ import cn.bmob.v3.listener.UpdateListener;
  * Package name: com.tao.note.data.local.prefs
  */
 public class AppPreferencesHelper implements PreferencesHelper {
+
+    private static final String PREF_KEY_CURRENT_USER_AVATAR_URL = "PREF_KEY_CURRENT_USER_AVATAR_URL";
+
     private final SharedPreferences mPrefs;
+
     private MyUser user;
 
     @Inject
@@ -99,6 +103,32 @@ public class AppPreferencesHelper implements PreferencesHelper {
             user.setAccountType(type.getType());
             updateToBmob();
         }
+    }
+
+    @Override
+    public String getCurrentUserAccountTypeName() {
+        String typeName = "Normal";
+        switch (getCurrentUserAccountType()) {
+            case 0:
+                typeName = "Normal";
+                break;
+            case 1:
+                typeName = "Admin";
+                break;
+            default:
+                break;
+        }
+        return typeName;
+    }
+
+    @Override
+    public String getCurrentUserAvatarUrl() {
+        return mPrefs.getString(PREF_KEY_CURRENT_USER_AVATAR_URL, null);
+    }
+
+    @Override
+    public void setCurrentUserAvatarUrl(String avatarUrl) {
+        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_AVATAR_URL, avatarUrl).apply();
     }
 
     private void updateToBmob() {
