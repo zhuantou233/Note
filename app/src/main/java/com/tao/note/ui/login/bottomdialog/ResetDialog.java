@@ -23,6 +23,8 @@ import com.tao.note.ui.login.resetpassword.ResetPasswordFragment;
 import com.tao.note.ui.login.signinwithcode.SignInWithCodeFragment;
 import com.tao.note.utils.ToastUtil;
 
+import java.util.Objects;
+
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
@@ -49,7 +51,7 @@ public class ResetDialog extends BaseDialog implements ResetCallback {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        BottomSheetDialog dialog = new BottomSheetDialog(getContext());
+        BottomSheetDialog dialog = new BottomSheetDialog(Objects.requireNonNull(getContext()));
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(true);
         return dialog;

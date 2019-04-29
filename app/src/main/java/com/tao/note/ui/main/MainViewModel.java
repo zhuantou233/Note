@@ -46,7 +46,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
         getNavigator().openLoginActivity();
     }
 
-    public void onNavMenuCreated() {
+    public void onDataLoad() {
         final String currentUserName = getDataManager().getCurrentUserName();
         if (!TextUtils.isEmpty(currentUserName)) {
             userName.set(currentUserName);

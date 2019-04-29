@@ -124,8 +124,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void setCurrentUserName(String name) {
-        mPreferencesHelper.setCurrentUserName(name);
+    public Observable<Void> setCurrentUserName(String name) {
+        return mPreferencesHelper.setCurrentUserName(name);
     }
 
     @Override
@@ -134,8 +134,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void setCurrentUserPhoneNumber(String phoneNumber) {
-        mPreferencesHelper.setCurrentUserPhoneNumber(phoneNumber);
+    public Observable<Void> setCurrentUserPhoneNumber(String phoneNumber) {
+        return mPreferencesHelper.setCurrentUserPhoneNumber(phoneNumber);
     }
 
     @Override
@@ -144,8 +144,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void setCurrentUserAvatar(BmobFile avatar) {
-        mPreferencesHelper.setCurrentUserAvatar(avatar);
+    public Observable<Void> setCurrentUserAvatar(BmobFile avatar) {
+        return mPreferencesHelper.setCurrentUserAvatar(avatar);
     }
 
     @Override
@@ -154,8 +154,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void setCurrentUserLoggedInMode(LoggedInMode mode) {
-        mPreferencesHelper.setCurrentUserLoggedInMode(mode);
+    public Observable<Void> setCurrentUserLoggedInMode(LoggedInMode mode) {
+        return mPreferencesHelper.setCurrentUserLoggedInMode(mode);
     }
 
     @Override
@@ -164,8 +164,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void setCurrentUserAccountType(AccountType type) {
-        mPreferencesHelper.setCurrentUserAccountType(type);
+    public Observable<Void> setCurrentUserAccountType(AccountType type) {
+        return mPreferencesHelper.setCurrentUserAccountType(type);
     }
 
     @Override

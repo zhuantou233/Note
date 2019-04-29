@@ -47,6 +47,13 @@
     <string name="profile">档案</string>
     <string name="account">账号</string>
     <string name="change_your_passowrd">更改您的密码</string>
+
+    <!--Profile-->
     <string name="name">名字</string>
     <string name="avatar">头像</string>
+    <string name="use_image_as_avatar">您可以使用自定义图片作为头像</string>
+    <string name="delete_account">删除账号</string>
+    <string name="input_your_name">输入您的名字</string>
+    <string name="confirm">完成</string>
+    <string name="update_fail">更新失败</string>
 </resources>

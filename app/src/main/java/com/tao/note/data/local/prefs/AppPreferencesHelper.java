@@ -15,6 +15,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
+import io.reactivex.Observable;
 
 /**
  * Created by Tao Zhou on 2019/4/17
@@ -44,11 +45,12 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public void setCurrentUserName(String name) {
+    public Observable<Void> setCurrentUserName(String name) {
         if (user != null) {
             user.setNickName(name);
-            updateToBmob();
+            return updateToBmob();
         }
+        return null;
     }
 
 
@@ -58,11 +60,12 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public void setCurrentUserPhoneNumber(String phoneNumber) {
+    public Observable<Void> setCurrentUserPhoneNumber(String phoneNumber) {
         if (user != null) {
             user.setMobilePhoneNumber(phoneNumber);
-            updateToBmob();
+            return updateToBmob();
         }
+        return null;
     }
 
     @Override
@@ -71,11 +74,12 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public void setCurrentUserAvatar(BmobFile avatar) {
+    public Observable<Void> setCurrentUserAvatar(BmobFile avatar) {
         if (user != null) {
             user.setAvatar(avatar);
-            updateToBmob();
+            return updateToBmob();
         }
+        return null;
     }
 
     @Override
@@ -86,8 +90,9 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode) {
+    public Observable<Void> setCurrentUserLoggedInMode(DataManager.LoggedInMode mode) {
         // todo
+        return null;
     }
 
     @Override
@@ -98,11 +103,12 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public void setCurrentUserAccountType(DataManager.AccountType type) {
+    public Observable<Void> setCurrentUserAccountType(DataManager.AccountType type) {
         if (user != null) {
             user.setAccountType(type.getType());
-            updateToBmob();
+            return updateToBmob();
         }
+        return null;
     }
 
     @Override
@@ -131,19 +137,16 @@ public class AppPreferencesHelper implements PreferencesHelper {
         mPrefs.edit().putString(PREF_KEY_CURRENT_USER_AVATAR_URL, avatarUrl).apply();
     }
 
-    private void updateToBmob() {
-        if (user != null) {
-            user.update(new UpdateListener() {
-                @Override
-                public void done(BmobException e) {
-                    if (e == null) {
-                        L.i("更新用户信息成功");
-                    } else {
-                        L.i("更新用户信息失败");
-                        L.e(e.getMessage());
-                    }
+    private Observable<Void> updateToBmob() {
+        return Observable.create(emitter -> user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    emitter.onComplete();
+                } else {
+                    emitter.onError(e);
                 }
-            });
-        }
+            }
+        }));
     }
 }

@@ -87,6 +87,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected void onResume() {
         super.onResume();
+        mMainViewModel.onDataLoad();
         if (mDrawer != null) {
             mDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         }
@@ -197,7 +198,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mDrawer.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         setupNavMenu();
-        mMainViewModel.onNavMenuCreated();
     }
 
     private void setupNavMenu() {

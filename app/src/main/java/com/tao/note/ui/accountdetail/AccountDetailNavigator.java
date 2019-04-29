@@ -7,4 +7,6 @@ package com.tao.note.ui.accountdetail;
 public interface AccountDetailNavigator {
 
     void handleError(Throwable throwable);
+
+    void dismissDialog();
 }

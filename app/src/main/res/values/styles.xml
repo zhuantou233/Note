@@ -125,4 +125,62 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="ClickFunctionStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:padding">@dimen/padding_medium</item>
+    </style>
+
+    <style name="FunctionTitleTextAppearance">
+        <item name="android:textSize">@dimen/text_size_huge</item>
+    </style>
+
+    <style name="FunctionContentTextAppearance">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="FunctionImageStyle">
+        <item name="android:layout_width">45dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="AccountDetailDialog" />
+
+    <style name="AccountDetailDialog.BackgroundStyle" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:background">@color/white</item>
+        <item name="android:padding">@dimen/padding_medium</item>
+    </style>
+
+    <style name="AccountDetailDialog.TitleAppearance">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AccountDetailDialog.EditAppearance">
+        <item name="android:textSize">@dimen/text_size_huge</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
+        <item name="android:focusable">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:backgroundTint">@color/red_dark2</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="AccountDetailDialog.MenuFormAppearance">
+        <item name="android:layout_marginTop">@dimen/margin_tiny</item>
+    </style>
+
+    <style name="AccountDetailDialog.MenuItemAppearance">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textColor">@color/red_dark</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:paddingStart">@dimen/padding_medium</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:paddingEnd">@dimen/padding_medium</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
 </resources>

@@ -3,6 +3,7 @@ package com.tao.note.data.local.prefs;
 import com.tao.note.data.DataManager;
 
 import cn.bmob.v3.datatype.BmobFile;
+import io.reactivex.Observable;
 
 /**
  * Created by Tao Zhou on 2019/4/17
@@ -12,23 +13,23 @@ public interface PreferencesHelper {
 
     String getCurrentUserName();
 
-    void setCurrentUserName(String name);
+    Observable<Void> setCurrentUserName(String name);
 
     String getCurrentUserPhoneNumber();
 
-    void setCurrentUserPhoneNumber(String phoneNumber);
+    Observable<Void> setCurrentUserPhoneNumber(String phoneNumber);
 
     BmobFile getCurrentUserAvatar();
 
-    void setCurrentUserAvatar(BmobFile avatar);
+    Observable<Void> setCurrentUserAvatar(BmobFile avatar);
 
     int getCurrentUserLoggedInMode();
 
-    void setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
+    Observable<Void> setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
 
     int getCurrentUserAccountType();
 
-    void setCurrentUserAccountType(DataManager.AccountType type);
+    Observable<Void> setCurrentUserAccountType(DataManager.AccountType type);
 
     String getCurrentUserAccountTypeName();
 

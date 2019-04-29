@@ -71,6 +71,12 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mProfileViewModel.onDataLoad();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button

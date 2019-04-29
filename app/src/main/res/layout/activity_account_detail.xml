@@ -48,14 +48,10 @@
 
                 <LinearLayout
                     android:id="@+id/avatar_form"
+                    style="@style/ClickFunctionStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.onAvatarClick()}"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/padding_medium">
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -64,37 +60,32 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/FunctionTitleTextAppearance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-
-                            android:text="@string/avatar"
-                            android:textSize="@dimen/text_size_huge" />
+                            android:text="@string/avatar" />
 
                         <TextView
                             android:id="@+id/textView"
+                            style="@style/FunctionContentTextAppearance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="您可以使用自定义图片作为头像"
-                            android:textSize="@dimen/text_size_small" />
+                            android:text="@string/use_image_as_avatar" />
 
 
                     </LinearLayout>
 
                     <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/iv_profile_pic"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_vertical"
+                        style="@style/FunctionImageStyle"
+                        app:imageUrl="@{viewModel.avatarUrl}"
                         fresco:actualImageScaleType="focusCrop"
                         fresco:backgroundImage="@android:color/holo_blue_light"
                         fresco:placeholderImage="@drawable/ic_avatar_white"
                         fresco:placeholderImageScaleType="fitCenter"
                         fresco:roundAsCircle="true" />
 
-
                 </LinearLayout>
-
 
                 <View
                     android:layout_width="match_parent"
@@ -103,27 +94,22 @@
 
                 <LinearLayout
                     android:id="@+id/name_form"
+                    style="@style/ClickFunctionStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.onNameClick()}"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_medium">
+                    android:orientation="vertical">
 
                     <TextView
+                        style="@style/FunctionTitleTextAppearance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/name"
-                        android:textSize="@dimen/text_size_huge" />
+                        android:text="@string/name" />
 
                     <TextView
+                        style="@style/FunctionContentTextAppearance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="username"
-                        android:textSize="@dimen/text_size_small" />
+                        android:text="@{viewModel.userName}" />
 
                 </LinearLayout>
 
@@ -134,27 +120,22 @@
 
                 <LinearLayout
                     android:id="@+id/phone_form"
+                    style="@style/ClickFunctionStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.onPhoneClick()}"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_medium">
+                    android:orientation="vertical">
 
                     <TextView
+                        style="@style/FunctionTitleTextAppearance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/phone_number"
-                        android:textSize="@dimen/text_size_huge" />
+                        android:text="@string/phone_number" />
 
                     <TextView
+                        style="@style/FunctionContentTextAppearance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10101010101"
-                        android:textSize="@dimen/text_size_small" />
+                        android:text="@{viewModel.userPhoneNumber}" />
 
                 </LinearLayout>
 
@@ -165,27 +146,22 @@
 
                 <LinearLayout
                     android:id="@+id/password_form"
+                    style="@style/ClickFunctionStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.onChangePasswordClick()}"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_medium">
+                    android:orientation="vertical">
 
                     <TextView
+                        style="@style/FunctionTitleTextAppearance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/password"
-                        android:textSize="@dimen/text_size_huge" />
+                        android:text="@string/password" />
 
                     <TextView
+                        style="@style/FunctionContentTextAppearance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/change_your_passowrd"
-                        android:textSize="@dimen/text_size_small" />
+                        android:text="@string/change_your_passowrd" />
 
                 </LinearLayout>
 
@@ -196,21 +172,16 @@
 
                 <LinearLayout
                     android:id="@+id/delete_account_form"
+                    style="@style/ClickFunctionStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="@{()->viewModel.onDeleteAccountClick()}"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/padding_medium">
+                    android:orientation="horizontal">
 
                     <TextView
+                        style="@style/FunctionTitleTextAppearance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="删除账号"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:text="@string/delete_account" />
 
                 </LinearLayout>
 
