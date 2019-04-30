@@ -137,7 +137,7 @@
     </style>
 
     <style name="FunctionContentTextAppearance">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 

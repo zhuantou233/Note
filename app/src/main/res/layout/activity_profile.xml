@@ -61,6 +61,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center_vertical"
+                        app:imageUrl="@{viewModel.avatarUrl}"
                         fresco:actualImageScaleType="focusCrop"
                         fresco:backgroundImage="@android:color/holo_blue_light"
                         fresco:placeholderImage="@drawable/ic_avatar_white"

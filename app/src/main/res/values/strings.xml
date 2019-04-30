@@ -48,6 +48,11 @@
     <string name="account">账号</string>
     <string name="change_your_passowrd">更改您的密码</string>
 
+    <!--Photo-->
+    <string name="ucrop_rotate">旋转</string>
+    <string name="ucrop_scale">缩放</string>
+    <string name="ucrop_crop">裁剪</string>
+
     <!--Profile-->
     <string name="name">名字</string>
     <string name="avatar">头像</string>
@@ -56,4 +61,5 @@
     <string name="input_your_name">输入您的名字</string>
     <string name="confirm">完成</string>
     <string name="update_fail">更新失败</string>
+    <string name="need_permission">此功能需要开启相关权限</string>
 </resources>

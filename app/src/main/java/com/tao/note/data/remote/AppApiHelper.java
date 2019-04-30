@@ -4,14 +4,18 @@ import com.tao.note.data.DataManager;
 import com.tao.note.data.model.db.MyUser;
 import com.tao.note.utils.L;
 
+import java.io.File;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
 import io.reactivex.Observable;
 
 /**
@@ -21,10 +25,12 @@ import io.reactivex.Observable;
 @Singleton
 public class AppApiHelper implements ApiHelper {
     private ApiHeader mApiHeader;
+    private MyUser user;
 
     @Inject
     public AppApiHelper(ApiHeader apiHeader) {
         mApiHeader = apiHeader;
+        user = BmobUser.getCurrentUser(MyUser.class);
     }
 
     @Override
@@ -75,5 +81,36 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public ApiHeader getApiHeader() {
         return mApiHeader;
+    }
+
+    @Override
+    public Observable<BmobFile> uploadFile(File file) {
+        BmobFile bmobFile = new BmobFile(file);
+        return Observable.create(emitter -> bmobFile.upload(new UploadFileListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    emitter.onNext(bmobFile);
+                    L.i("uploadFile");
+                } else {
+                    emitter.onError(e);
+                }
+            }
+        }));
+    }
+
+    @Override
+    public Observable<MyUser> uploadUserInfo() {
+        return Observable.create(emitter -> user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    L.i("uploadUserInfo");
+                    emitter.onNext(user);
+                } else {
+                    emitter.onError(e);
+                }
+            }
+        }));
     }
 }

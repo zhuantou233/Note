@@ -83,6 +83,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<BmobFile> uploadFile(File file) {
+        return mApiHelper.uploadFile(file);
+    }
+
+    @Override
+    public Observable<MyUser> uploadUserInfo() {
+        return mApiHelper.uploadUserInfo();
+    }
+
+    @Override
     public Observable<Boolean> seedAppSettings() {
         // todo app初始化加载固定资源或设置
         return Observable.just(true);
@@ -144,7 +154,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Void> setCurrentUserAvatar(BmobFile avatar) {
+    public Observable<Void> setCurrentUserAvatar(File avatar) {
         return mPreferencesHelper.setCurrentUserAvatar(avatar);
     }
 

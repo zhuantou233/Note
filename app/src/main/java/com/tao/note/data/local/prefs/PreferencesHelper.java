@@ -2,6 +2,8 @@ package com.tao.note.data.local.prefs;
 
 import com.tao.note.data.DataManager;
 
+import java.io.File;
+
 import cn.bmob.v3.datatype.BmobFile;
 import io.reactivex.Observable;
 
@@ -21,7 +23,7 @@ public interface PreferencesHelper {
 
     BmobFile getCurrentUserAvatar();
 
-    Observable<Void> setCurrentUserAvatar(BmobFile avatar);
+    Observable<Void> setCurrentUserAvatar(File avatar);
 
     int getCurrentUserLoggedInMode();
 

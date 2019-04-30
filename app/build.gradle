@@ -94,6 +94,12 @@ dependencies {
     // easypermissions
     implementation "pub.devrel:easypermissions:$rootProject.easypermissionsVersion"
 
+    // ucrop
+    implementation "com.github.yalantis:ucrop:$rootProject.ucropVersion"
+
+    // logger
+    implementation "com.orhanobut:logger:$rootProject.loggerVersion"
+
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     androidTestImplementation "androidx.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"

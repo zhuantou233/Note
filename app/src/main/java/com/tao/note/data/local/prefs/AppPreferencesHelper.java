@@ -9,12 +9,15 @@ import com.tao.note.di.PreferenceInfo;
 import com.tao.note.utils.AppConstants;
 import com.tao.note.utils.L;
 
+import java.io.File;
+
 import javax.inject.Inject;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
 import io.reactivex.Observable;
 
 /**
@@ -74,11 +77,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public Observable<Void> setCurrentUserAvatar(BmobFile avatar) {
-        if (user != null) {
-            user.setAvatar(avatar);
-            return updateToBmob();
-        }
+    public Observable<Void> setCurrentUserAvatar(File avatar) {
         return null;
     }
 
@@ -129,7 +128,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getCurrentUserAvatarUrl() {
-        return mPrefs.getString(PREF_KEY_CURRENT_USER_AVATAR_URL, null);
+        return "file://" + mPrefs.getString(PREF_KEY_CURRENT_USER_AVATAR_URL, null);
     }
 
     @Override

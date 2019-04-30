@@ -7,10 +7,20 @@ import androidx.databinding.ObservableField;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.tao.note.data.DataManager;
+import com.tao.note.data.model.db.MyUser;
 import com.tao.note.ui.base.BaseViewModel;
 import com.tao.note.utils.L;
+import com.tao.note.utils.PhotoUtil;
 import com.tao.note.utils.rx.SchedulerProvider;
 
+import java.io.File;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
+import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DefaultObserver;
 
 /**
@@ -118,6 +128,40 @@ public class AccountDetailViewModel extends BaseViewModel<AccountDetailNavigator
                         setIsLoading(false);
                         L.i("更新成功");
                         getNavigator().dismissDialog();
+                    }
+                });
+    }
+
+    public void onUploadAvatar(File file) {
+        setIsLoading(true);
+        getDataManager()
+                .uploadFile(file)
+                .doOnNext(bmobFile -> {
+                    BmobUser.getCurrentUser(MyUser.class).setAvatar(bmobFile);
+                    L.i("doAfterNext");
+                })
+                .concatMap(bmobFile -> getDataManager().uploadUserInfo())
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(new DefaultObserver<MyUser>() {
+                    @Override
+                    public void onNext(MyUser myUser) {
+                        setIsLoading(false);
+                        L.i("更新成功");
+                        getDataManager().updateUserInfo(BmobUser.getCurrentUser(MyUser.class));
+                        onDataLoad();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        setIsLoading(false);
+                        L.i("更新失败：" + e.getMessage() + "\n");
+                        getNavigator().handleError(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }

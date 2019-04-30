@@ -52,6 +52,11 @@
             android:launchMode="singleTop"
             android:parentActivityName=".ui.profile.ProfileActivity" />
 
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
             android:authorities="com.tao.note.BmobContentProvider" />
