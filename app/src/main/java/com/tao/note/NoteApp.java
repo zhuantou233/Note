@@ -6,7 +6,10 @@ import android.app.Application;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.tao.note.di.component.DaggerAppComponent;
+import com.tao.note.utils.Util;
 
 import javax.inject.Inject;
 
@@ -59,6 +62,10 @@ public class NoteApp extends Application implements HasActivityInjector {
         if (BuildConfig.DEBUG) {
             AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
         }
+
+        Logger.addLogAdapter(new AndroidLogAdapter());
+
+        Util.syncIsDebug(getApplicationContext());
 
         ViewPump.init(ViewPump.builder()
                 .addInterceptor(new CalligraphyInterceptor(

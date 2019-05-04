@@ -10,17 +10,10 @@ import com.tao.note.data.DataManager;
 import com.tao.note.data.model.db.MyUser;
 import com.tao.note.ui.base.BaseViewModel;
 import com.tao.note.utils.L;
-import com.tao.note.utils.PhotoUtil;
 import com.tao.note.utils.rx.SchedulerProvider;
 
 import java.io.File;
 
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.UpdateListener;
-import cn.bmob.v3.listener.UploadFileListener;
-import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DefaultObserver;
 
 /**
@@ -79,13 +72,16 @@ public class AccountDetailViewModel extends BaseViewModel<AccountDetailNavigator
     public void onNameConfirmClick() {
         setIsLoading(true);
         getDataManager()
-                .setCurrentUserName(userName.get())
+                .uploadUserName(userName.get())
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(new DefaultObserver<Void>() {
+                .subscribe(new DefaultObserver<MyUser>() {
                     @Override
-                    public void onNext(Void aVoid) {
-
+                    public void onNext(MyUser user) {
+                        setIsLoading(false);
+                        L.i("更新成功");
+                        getDataManager().setCurrentUser(user);
+                        getNavigator().dismissDialog();
                     }
 
                     @Override
@@ -97,9 +93,7 @@ public class AccountDetailViewModel extends BaseViewModel<AccountDetailNavigator
 
                     @Override
                     public void onComplete() {
-                        setIsLoading(false);
-                        L.i("更新成功");
-                        getNavigator().dismissDialog();
+
                     }
                 });
     }
@@ -107,13 +101,16 @@ public class AccountDetailViewModel extends BaseViewModel<AccountDetailNavigator
     public void onPhoneConfirmClick() {
         setIsLoading(true);
         getDataManager()
-                .setCurrentUserPhoneNumber(userPhoneNumber.get())
+                .uploadUserPhoneNumber(userPhoneNumber.get())
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(new DefaultObserver<Void>() {
+                .subscribe(new DefaultObserver<MyUser>() {
                     @Override
-                    public void onNext(Void aVoid) {
-
+                    public void onNext(MyUser user) {
+                        setIsLoading(false);
+                        L.i("更新成功");
+                        getDataManager().setCurrentUser(user);
+                        getNavigator().dismissDialog();
                     }
 
                     @Override
@@ -125,9 +122,7 @@ public class AccountDetailViewModel extends BaseViewModel<AccountDetailNavigator
 
                     @Override
                     public void onComplete() {
-                        setIsLoading(false);
-                        L.i("更新成功");
-                        getNavigator().dismissDialog();
+
                     }
                 });
     }
@@ -135,20 +130,17 @@ public class AccountDetailViewModel extends BaseViewModel<AccountDetailNavigator
     public void onUploadAvatar(File file) {
         setIsLoading(true);
         getDataManager()
-                .uploadFile(file)
-                .doOnNext(bmobFile -> {
-                    BmobUser.getCurrentUser(MyUser.class).setAvatar(bmobFile);
-                    L.i("doAfterNext");
-                })
-                .concatMap(bmobFile -> getDataManager().uploadUserInfo())
+                .uploadAvatar(file)
+                .concatMap(user -> getDataManager().uploadUserInfo(user))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new DefaultObserver<MyUser>() {
                     @Override
-                    public void onNext(MyUser myUser) {
+                    public void onNext(MyUser user) {
                         setIsLoading(false);
                         L.i("更新成功");
-                        getDataManager().updateUserInfo(BmobUser.getCurrentUser(MyUser.class));
+                        L.i(user.getAvatar().getUrl());
+                        getDataManager().setCurrentUser(user);
                         onDataLoad();
                     }
 

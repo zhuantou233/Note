@@ -17,7 +17,7 @@ public interface DataManager extends DBHelper, ApiHelper, PreferencesHelper {
 
     void setUserAsLoggedOut();
 
-    void updateUserInfo(MyUser user);
+    void getCurrentUser(MyUser user);
 
     enum LoggedInMode {
 

@@ -68,7 +68,7 @@ public class SignInWithCodeViewModel extends BaseViewModel<SignInWithCodeNavigat
                     public void onNext(MyUser myUser) {
                         setIsLoading(false);
                         L.i("登录成功");
-                        getDataManager().updateUserInfo(myUser);
+                        getDataManager().setCurrentUser(myUser);
                         getNavigator().openMainActivity();
                     }
 

@@ -70,7 +70,7 @@ public class ResetPasswordViewModel extends BaseViewModel<ResetPasswordNavigator
                     public void onNext(BmobException e) {
                         setIsLoading(false);
                         L.i("重置成功");
-                        getDataManager().updateUserInfo(BmobUser.getCurrentUser(MyUser.class));
+                        getDataManager().setCurrentUser(BmobUser.getCurrentUser(MyUser.class));
                         getNavigator().openMainActivity();
                     }
 

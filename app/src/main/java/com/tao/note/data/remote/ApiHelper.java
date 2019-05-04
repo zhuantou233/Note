@@ -1,5 +1,6 @@
 package com.tao.note.data.remote;
 
+import com.tao.note.data.DataManager;
 import com.tao.note.data.model.db.MyUser;
 
 import java.io.File;
@@ -27,7 +28,14 @@ public interface ApiHelper {
 
     ApiHeader getApiHeader();
 
-    Observable<BmobFile> uploadFile(File file);
+    Observable<MyUser> uploadAvatar(File file);
 
-    Observable<MyUser> uploadUserInfo();
+    Observable<MyUser> uploadUserInfo(MyUser user);
+
+    Observable<MyUser> uploadUserName(String name);
+
+    Observable<MyUser> uploadUserPhoneNumber(String phone);
+
+    Observable<MyUser> uploadUserAccountType(DataManager.AccountType type);
+
 }

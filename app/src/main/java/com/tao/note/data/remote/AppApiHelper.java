@@ -25,12 +25,10 @@ import io.reactivex.Observable;
 @Singleton
 public class AppApiHelper implements ApiHelper {
     private ApiHeader mApiHeader;
-    private MyUser user;
 
     @Inject
     public AppApiHelper(ApiHeader apiHeader) {
         mApiHeader = apiHeader;
-        user = BmobUser.getCurrentUser(MyUser.class);
     }
 
     @Override
@@ -84,14 +82,17 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Observable<BmobFile> uploadFile(File file) {
+    public Observable<MyUser> uploadAvatar(File file) {
         BmobFile bmobFile = new BmobFile(file);
+        MyUser user = BmobUser.getCurrentUser(MyUser.class);
         return Observable.create(emitter -> bmobFile.upload(new UploadFileListener() {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    emitter.onNext(bmobFile);
-                    L.i("uploadFile");
+                    user.setAvatar(bmobFile);
+                    emitter.onNext(user);
+                    emitter.onComplete();
+                    L.i("uploadAvatar");
                 } else {
                     emitter.onError(e);
                 }
@@ -100,17 +101,39 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Observable<MyUser> uploadUserInfo() {
+    public Observable<MyUser> uploadUserInfo(MyUser user) {
         return Observable.create(emitter -> user.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
                     L.i("uploadUserInfo");
                     emitter.onNext(user);
+                    emitter.onComplete();
                 } else {
                     emitter.onError(e);
                 }
             }
         }));
+    }
+
+    @Override
+    public Observable<MyUser> uploadUserName(String name) {
+        MyUser user = BmobUser.getCurrentUser(MyUser.class);
+        user.setNickName(name);
+        return uploadUserInfo(user);
+    }
+
+    @Override
+    public Observable<MyUser> uploadUserPhoneNumber(String phone) {
+        MyUser user = BmobUser.getCurrentUser(MyUser.class);
+        user.setMobilePhoneNumber(phone);
+        return uploadUserInfo(user);
+    }
+
+    @Override
+    public Observable<MyUser> uploadUserAccountType(DataManager.AccountType type) {
+        MyUser user = BmobUser.getCurrentUser(MyUser.class);
+        user.setAccountType(type.getType());
+        return uploadUserInfo(user);
     }
 }

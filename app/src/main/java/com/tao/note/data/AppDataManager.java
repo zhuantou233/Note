@@ -83,13 +83,28 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<BmobFile> uploadFile(File file) {
-        return mApiHelper.uploadFile(file);
+    public Observable<MyUser> uploadAvatar(File file) {
+        return mApiHelper.uploadAvatar(file);
     }
 
     @Override
-    public Observable<MyUser> uploadUserInfo() {
-        return mApiHelper.uploadUserInfo();
+    public Observable<MyUser> uploadUserInfo(MyUser user) {
+        return mApiHelper.uploadUserInfo(user);
+    }
+
+    @Override
+    public Observable<MyUser> uploadUserName(String name) {
+        return mApiHelper.uploadUserName(name);
+    }
+
+    @Override
+    public Observable<MyUser> uploadUserPhoneNumber(String phone) {
+        return mApiHelper.uploadUserPhoneNumber(phone);
+    }
+
+    @Override
+    public Observable<MyUser> uploadUserAccountType(AccountType type) {
+        return mApiHelper.uploadUserAccountType(type);
     }
 
     @Override
@@ -105,27 +120,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public void updateUserInfo(MyUser user) {
-        BmobFile avatarFile = user.getAvatar();
-        if (avatarFile != null && getCurrentUserAvatarUrl() == null) {
-            File saveFile = new File(Environment.getExternalStorageDirectory(), avatarFile.getFilename());
-            avatarFile.download(saveFile, new DownloadFileListener() {
-                @Override
-                public void done(String s, BmobException e) {
-                    if (e == null) {
-                        setCurrentUserAvatarUrl(s);
-                        L.i("下载成功" + s);
-                    } else {
-                        L.i("下载失败: " + e.getErrorCode() + "-" + e.getMessage());
-                    }
-                }
-
-                @Override
-                public void onProgress(Integer integer, long l) {
-
-                }
-            });
-        }
+    public void getCurrentUser(MyUser user) {
+//        mPreferencesHelper.getCurrentUser(user);
     }
 
     @Override
@@ -134,7 +130,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Void> setCurrentUserName(String name) {
+    public Observable<MyUser> setCurrentUserName(String name) {
         return mPreferencesHelper.setCurrentUserName(name);
     }
 
@@ -144,7 +140,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Void> setCurrentUserPhoneNumber(String phoneNumber) {
+    public Observable<MyUser> setCurrentUserPhoneNumber(String phoneNumber) {
         return mPreferencesHelper.setCurrentUserPhoneNumber(phoneNumber);
     }
 
@@ -154,7 +150,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Void> setCurrentUserAvatar(File avatar) {
+    public Observable<MyUser> setCurrentUserAvatar(BmobFile avatar) {
         return mPreferencesHelper.setCurrentUserAvatar(avatar);
     }
 
@@ -164,7 +160,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Void> setCurrentUserLoggedInMode(LoggedInMode mode) {
+    public Observable<MyUser> setCurrentUserLoggedInMode(LoggedInMode mode) {
         return mPreferencesHelper.setCurrentUserLoggedInMode(mode);
     }
 
@@ -174,7 +170,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Void> setCurrentUserAccountType(AccountType type) {
+    public Observable<MyUser> setCurrentUserAccountType(AccountType type) {
         return mPreferencesHelper.setCurrentUserAccountType(type);
     }
 
@@ -191,5 +187,15 @@ public class AppDataManager implements DataManager {
     @Override
     public void setCurrentUserAvatarUrl(String avatarUrl) {
         mPreferencesHelper.setCurrentUserAvatarUrl(avatarUrl);
+    }
+
+    @Override
+    public void setCurrentUser(MyUser myUser) {
+        mPreferencesHelper.setCurrentUser(myUser);
+    }
+
+    @Override
+    public MyUser getCurrentUser() {
+        return mPreferencesHelper.getCurrentUser();
     }
 }

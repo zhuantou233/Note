@@ -1,6 +1,7 @@
 package com.tao.note.data.local.prefs;
 
 import com.tao.note.data.DataManager;
+import com.tao.note.data.model.db.MyUser;
 
 import java.io.File;
 
@@ -15,27 +16,31 @@ public interface PreferencesHelper {
 
     String getCurrentUserName();
 
-    Observable<Void> setCurrentUserName(String name);
+    Observable<MyUser> setCurrentUserName(String name);
 
     String getCurrentUserPhoneNumber();
 
-    Observable<Void> setCurrentUserPhoneNumber(String phoneNumber);
+    Observable<MyUser> setCurrentUserPhoneNumber(String phoneNumber);
 
     BmobFile getCurrentUserAvatar();
 
-    Observable<Void> setCurrentUserAvatar(File avatar);
+    Observable<MyUser> setCurrentUserAvatar(BmobFile avatar);
 
     int getCurrentUserLoggedInMode();
 
-    Observable<Void> setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
+    Observable<MyUser> setCurrentUserLoggedInMode(DataManager.LoggedInMode mode);
 
     int getCurrentUserAccountType();
 
-    Observable<Void> setCurrentUserAccountType(DataManager.AccountType type);
+    Observable<MyUser> setCurrentUserAccountType(DataManager.AccountType type);
 
     String getCurrentUserAccountTypeName();
 
     String getCurrentUserAvatarUrl();
 
     void setCurrentUserAvatarUrl(String avatarUrl);
+
+    void setCurrentUser(MyUser myUser);
+
+    MyUser getCurrentUser();
 }

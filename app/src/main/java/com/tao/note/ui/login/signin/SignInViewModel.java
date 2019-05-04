@@ -6,10 +6,7 @@ import com.tao.note.ui.base.BaseViewModel;
 import com.tao.note.utils.L;
 import com.tao.note.utils.rx.SchedulerProvider;
 
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DefaultObserver;
-import io.reactivex.observers.DisposableObserver;
 
 /**
  * Created by Tao Zhou on 2019/4/22
@@ -43,7 +40,7 @@ public class SignInViewModel extends BaseViewModel<SignInNavigator> {
                     public void onNext(MyUser myUser) {
                         setIsLoading(false);
                         L.i("登录成功");
-                        getDataManager().updateUserInfo(myUser);
+                        getDataManager().setCurrentUser(myUser);
                         getNavigator().openMainActivity();
                     }
 

@@ -3,6 +3,8 @@ package com.tao.note.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.orhanobut.logger.Logger;
+
 public class L {
     private static String TAG = "MyNote";
 
@@ -18,11 +20,10 @@ public class L {
      *
      * @param msg
      */
-    public static void d(String msg) {
-        if (TextUtils.isEmpty(msg)) {
-            return;
+    public static void d(Object msg) {
+        if (Util.isDebug()) {
+            Logger.d(msg);
         }
-        Log.d(TAG, msg);
     }
 
     /**
@@ -31,10 +32,9 @@ public class L {
      * @param msg
      */
     public static void e(String msg) {
-        if (TextUtils.isEmpty(msg)) {
-            return;
+        if (Util.isDebug()) {
+            Logger.e(msg);
         }
-        Log.e(TAG, msg);
     }
 
     /**
@@ -43,10 +43,9 @@ public class L {
      * @param msg
      */
     public static void e(String msg, Throwable throwable) {
-        if (TextUtils.isEmpty(msg)) {
-            return;
+        if (Util.isDebug()) {
+            Logger.e(msg, throwable);
         }
-        Log.e(TAG, msg, throwable);
     }
 
     /**
@@ -55,10 +54,9 @@ public class L {
      * @param msg
      */
     public static void w(String msg) {
-        if (TextUtils.isEmpty(msg)) {
-            return;
+        if (Util.isDebug()) {
+            Logger.w(msg);
         }
-        Log.w(TAG, msg);
     }
 
     /**
@@ -67,10 +65,9 @@ public class L {
      * @param msg
      */
     public static void i(String msg) {
-        if (TextUtils.isEmpty(msg)) {
-            return;
+        if (Util.isDebug()) {
+            Logger.i(msg);
         }
-        Log.i(TAG, msg);
     }
 
     /**
@@ -79,9 +76,8 @@ public class L {
      * @param msg
      */
     public static void v(String msg) {
-        if (TextUtils.isEmpty(msg)) {
-            return;
+        if (Util.isDebug()) {
+            Logger.v(msg);
         }
-        Log.v(TAG, msg);
     }
 }

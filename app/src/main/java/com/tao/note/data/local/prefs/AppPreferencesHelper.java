@@ -19,6 +19,8 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 
 /**
  * Created by Tao Zhou on 2019/4/17
@@ -38,6 +40,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
         user = BmobUser.getCurrentUser(MyUser.class);
     }
 
+
     @Override
     public String getCurrentUserName() {
         if (user == null || user.getNickName() == null) {
@@ -48,7 +51,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public Observable<Void> setCurrentUserName(String name) {
+    public Observable<MyUser> setCurrentUserName(String name) {
         if (user != null) {
             user.setNickName(name);
             return updateToBmob();
@@ -63,7 +66,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public Observable<Void> setCurrentUserPhoneNumber(String phoneNumber) {
+    public Observable<MyUser> setCurrentUserPhoneNumber(String phoneNumber) {
         if (user != null) {
             user.setMobilePhoneNumber(phoneNumber);
             return updateToBmob();
@@ -77,7 +80,11 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public Observable<Void> setCurrentUserAvatar(File avatar) {
+    public Observable<MyUser> setCurrentUserAvatar(BmobFile avatar) {
+        if (user != null) {
+            user.setAvatar(avatar);
+            return updateToBmob();
+        }
         return null;
     }
 
@@ -89,7 +96,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public Observable<Void> setCurrentUserLoggedInMode(DataManager.LoggedInMode mode) {
+    public Observable<MyUser> setCurrentUserLoggedInMode(DataManager.LoggedInMode mode) {
         // todo
         return null;
     }
@@ -102,7 +109,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public Observable<Void> setCurrentUserAccountType(DataManager.AccountType type) {
+    public Observable<MyUser> setCurrentUserAccountType(DataManager.AccountType type) {
         if (user != null) {
             user.setAccountType(type.getType());
             return updateToBmob();
@@ -128,19 +135,36 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getCurrentUserAvatarUrl() {
-        return "file://" + mPrefs.getString(PREF_KEY_CURRENT_USER_AVATAR_URL, null);
+        if (user != null && user.getAvatar() != null) {
+            return user.getAvatar().getUrl();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public void setCurrentUserAvatarUrl(String avatarUrl) {
-        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_AVATAR_URL, avatarUrl).apply();
+//        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_AVATAR_URL, avatarUrl).apply();
     }
 
-    private Observable<Void> updateToBmob() {
+    @Override
+    public void setCurrentUser(MyUser myUser) {
+        if (myUser != null) {
+            user = myUser;
+        }
+    }
+
+    @Override
+    public MyUser getCurrentUser() {
+        return user;
+    }
+
+    private Observable<MyUser> updateToBmob() {
         return Observable.create(emitter -> user.update(new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
+                    emitter.onNext(user);
                     emitter.onComplete();
                 } else {
                     emitter.onError(e);
