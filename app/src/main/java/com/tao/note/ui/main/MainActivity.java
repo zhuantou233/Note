@@ -27,6 +27,7 @@ import com.tao.note.databinding.ActivityMainBinding;
 import com.tao.note.databinding.NavHeaderMainBinding;
 import com.tao.note.ui.base.BaseActivity;
 import com.tao.note.ui.login.LoginActivity;
+import com.tao.note.ui.main.today.RecordTodayFragment;
 import com.tao.note.ui.profile.ProfileActivity;
 
 import javax.inject.Inject;
@@ -204,21 +205,39 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
         mNavigationView.setNavigationItemSelectedListener(
                 item -> {
-                    mDrawer.closeDrawer(GravityCompat.START);
-                    switch (item.getItemId()) {
-                        case R.id.nav_today:
-                            return true;
-                        case R.id.nav_week:
-                            return true;
-                        case R.id.nav_filter:
-                            return true;
-                        case R.id.nav_settings:
-                            mMainViewModel.onLogout();
-                            return true;
-                        default:
-                            return false;
-                    }
+                    selectDrawerItem(item);
+                    return true;
                 });
+    }
+
+    private void selectDrawerItem(MenuItem menuItem) {
+        Fragment fragment = null;
+        Class fragmentClass = RecordTodayFragment.class;
+        switch (menuItem.getItemId()) {
+            case R.id.nav_today:
+                fragmentClass = RecordTodayFragment.class;
+                break;
+            case R.id.nav_week:
+                break;
+            case R.id.nav_filter:
+                break;
+            case R.id.nav_settings:
+                mMainViewModel.onLogout();
+                break;
+            default:
+                break;
+        }
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+
+        menuItem.setChecked(true);
+        setTitle(menuItem.getTitle());
+        mDrawer.closeDrawer(GravityCompat.START);
     }
 
     private void unlockDrawer() {

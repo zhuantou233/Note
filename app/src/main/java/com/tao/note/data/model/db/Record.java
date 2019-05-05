@@ -13,6 +13,8 @@ import cn.bmob.v3.datatype.BmobRelation;
  */
 public class Record extends BmobObject {
     private Float money;                // 金额
+    private Float unitPrice;            // 单价
+    private Float quantity;             // 数量
     private BmobDate recordDate;        // 记录时间
     private Boolean isIncomeOrExpense;  // 收入还是支出
     private String recordType;          // 支出类型
@@ -22,10 +24,12 @@ public class Record extends BmobObject {
     private List<BmobFile> photos;      // 照片
     private BmobRelation targets;       // 关联对象，对应contact
 
-    public Record(Float money, BmobDate recordDate, Boolean isIncomeOrExpense,
-                  String recordType, String moneyType, String extraInfo,
-                  MyUser author, List<BmobFile> photos, BmobRelation targets) {
+    public Record(Float money, Float unitPrice, Float quantity, BmobDate recordDate,
+                  Boolean isIncomeOrExpense, String recordType, String moneyType,
+                  String extraInfo, MyUser author, List<BmobFile> photos, BmobRelation targets) {
         this.money = money;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
         this.recordDate = recordDate;
         this.isIncomeOrExpense = isIncomeOrExpense;
         this.recordType = recordType;
@@ -34,6 +38,22 @@ public class Record extends BmobObject {
         this.author = author;
         this.photos = photos;
         this.targets = targets;
+    }
+
+    public Float getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Float unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public Float getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Float quantity) {
+        this.quantity = quantity;
     }
 
     public Float getMoney() {
