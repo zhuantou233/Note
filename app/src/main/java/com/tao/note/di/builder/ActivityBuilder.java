@@ -11,6 +11,7 @@ import com.tao.note.ui.login.signin.SignInFragmentProvider;
 import com.tao.note.ui.login.signinwithcode.SignInWithCodeFragmentProvider;
 import com.tao.note.ui.login.signup.SignUpFragmentProvider;
 import com.tao.note.ui.main.MainActivity;
+import com.tao.note.ui.main.today.RecordTodayFragmentProvider;
 import com.tao.note.ui.profile.ProfileActivity;
 import com.tao.note.ui.splash.SplashActivity;
 
@@ -39,7 +40,9 @@ public abstract class ActivityBuilder {
     })
     abstract LoginActivity bindLoginActivity();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = {
+            RecordTodayFragmentProvider.class
+    })
     abstract MainActivity bindMainActivity();
 
     @ContributesAndroidInjector

@@ -8,7 +8,7 @@ import com.tao.note.utils.rx.SchedulerProvider;
  * Created by Tao Zhou on 2019/5/5
  * Package name: com.tao.note.ui.main.today
  */
-public class RecordTodayViewModel extends BaseViewModel<RecordTodayViewModel> {
+public class RecordTodayViewModel extends BaseViewModel<RecordTodayNavigator> {
     public RecordTodayViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }

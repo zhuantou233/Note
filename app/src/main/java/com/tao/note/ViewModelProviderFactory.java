@@ -10,6 +10,7 @@ import com.tao.note.ui.login.signin.SignInViewModel;
 import com.tao.note.ui.login.signinwithcode.SignInWithCodeViewModel;
 import com.tao.note.ui.login.signup.SignUpViewModel;
 import com.tao.note.ui.main.MainViewModel;
+import com.tao.note.ui.main.today.RecordTodayViewModel;
 import com.tao.note.ui.profile.ProfileViewModel;
 import com.tao.note.ui.splash.SplashViewModel;
 import com.tao.note.utils.rx.SchedulerProvider;
@@ -73,6 +74,9 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(ChangeUserPasswordViewModel.class)) {
             //noinspection unchecked
             return (T) new ChangeUserPasswordViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RecordTodayViewModel.class)) {
+            //noinspection unchecked
+            return (T) new RecordTodayViewModel(dataManager, schedulerProvider);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }
