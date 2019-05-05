@@ -61,5 +61,8 @@
     <string name="input_your_name">输入您的名字</string>
     <string name="confirm">完成</string>
     <string name="update_fail">更新失败</string>
+    <string name="update_success">更新成功</string>
     <string name="need_permission">此功能需要开启相关权限</string>
+    <string name="old_password">旧密码</string>
+    <string name="new_password">新密码</string>
 </resources>

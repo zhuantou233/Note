@@ -19,6 +19,7 @@ import com.tao.note.ui.accountdetail.AccountDetailViewModel;
 import com.tao.note.ui.base.BaseDialog;
 import com.tao.note.utils.ToastUtil;
 
+import java.net.UnknownHostException;
 import java.util.Objects;
 
 import javax.inject.Inject;
@@ -70,7 +71,11 @@ public class ChangeUserPhoneNumberDialog extends BaseDialog implements AccountDe
 
     @Override
     public void handleError(Throwable throwable) {
-        ToastUtil.getInstance(getContext()).shortToast(getString(R.string.update_fail));
+        if (throwable.getCause() instanceof UnknownHostException) {
+            ToastUtil.getInstance(getContext()).shortToast(getString(R.string.no_network));
+        } else {
+            ToastUtil.getInstance(getContext()).shortToast(throwable.getMessage());
+        }
     }
 
     @Override

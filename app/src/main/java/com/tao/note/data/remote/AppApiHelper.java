@@ -13,6 +13,7 @@ import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FetchUserInfoListener;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
@@ -67,8 +68,35 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Observable<BmobException> doResetPassword(String phone, String password, String code) {
-        return BmobUser.resetPasswordBySMSCodeObservable(code, password);
+    public Observable<MyUser> doResetPassword(String phone, String password, String code) {
+        return Observable.create(emitter -> BmobUser.resetPasswordBySMSCode(code, password, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    MyUser user = BmobUser.getCurrentUser(MyUser.class);
+                    emitter.onNext(user);
+                    emitter.onComplete();
+                } else {
+                    emitter.onError(e);
+                }
+            }
+        }));
+    }
+
+    @Override
+    public Observable<MyUser> doUpdatePassword(String oldPassword, String newPassword) {
+        return Observable.create(emitter -> BmobUser.updateCurrentUserPassword(oldPassword, newPassword, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    MyUser user = BmobUser.getCurrentUser(MyUser.class);
+                    emitter.onNext(user);
+                    emitter.onComplete();
+                } else {
+                    emitter.onError(e);
+                }
+            }
+        }));
     }
 
     @Override
@@ -135,5 +163,21 @@ public class AppApiHelper implements ApiHelper {
         MyUser user = BmobUser.getCurrentUser(MyUser.class);
         user.setAccountType(type.getType());
         return uploadUserInfo(user);
+    }
+
+    @Override
+    public Observable<MyUser> fetchUserInfo() {
+        return Observable.create(emitter -> BmobUser.fetchUserInfo(new FetchUserInfoListener<BmobUser>() {
+            @Override
+            public void done(BmobUser bmobUser, BmobException e) {
+                if (e == null) {
+                    MyUser user = BmobUser.getCurrentUser(MyUser.class);
+                    emitter.onNext(user);
+                    emitter.onComplete();
+                } else {
+                    emitter.onError(e);
+                }
+            }
+        }));
     }
 }

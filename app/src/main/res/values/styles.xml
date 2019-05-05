@@ -167,6 +167,16 @@
         <item name="android:focusableInTouchMode">true</item>
     </style>
 
+    <style name="AccountDetailDialog.PasswordAppearance">
+        <item name="android:textSize">@dimen/text_size_huge</item>
+        <item name="android:focusable">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:maxLength">30</item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:backgroundTint">@color/red_dark2</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
     <style name="AccountDetailDialog.MenuFormAppearance">
         <item name="android:layout_marginTop">@dimen/margin_tiny</item>
     </style>

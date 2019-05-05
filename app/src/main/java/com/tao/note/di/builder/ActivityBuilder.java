@@ -1,6 +1,7 @@
 package com.tao.note.di.builder;
 
 import com.tao.note.ui.accountdetail.AccountDetailActivity;
+import com.tao.note.ui.accountdetail.changepassword.ChangeUserPasswordDialogProvider;
 import com.tao.note.ui.accountdetail.changeusername.ChangeUserNameDialogProvider;
 import com.tao.note.ui.accountdetail.changeuserphonenumber.ChangeUserPhoneNumberDialogProvider;
 import com.tao.note.ui.login.LoginActivity;
@@ -49,7 +50,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = {
             ChangeUserNameDialogProvider.class,
-            ChangeUserPhoneNumberDialogProvider.class
+            ChangeUserPhoneNumberDialogProvider.class,
+            ChangeUserPasswordDialogProvider.class
     })
     abstract AccountDetailActivity bindAccountDetailActivity();
 }

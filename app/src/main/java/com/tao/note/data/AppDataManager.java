@@ -68,8 +68,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<BmobException> doResetPassword(String phone, String password, String code) {
+    public Observable<MyUser> doResetPassword(String phone, String password, String code) {
         return mApiHelper.doResetPassword(phone, password, code);
+    }
+
+    @Override
+    public Observable<MyUser> doUpdatePassword(String oldPassword, String newPassword) {
+        return mApiHelper.doUpdatePassword(oldPassword, newPassword);
     }
 
     @Override
@@ -108,20 +113,14 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<MyUser> fetchUserInfo() {
+        return mApiHelper.fetchUserInfo();
+    }
+
+    @Override
     public Observable<Boolean> seedAppSettings() {
         // todo app初始化加载固定资源或设置
         return Observable.just(true);
-    }
-
-    @Override
-    public void setUserAsLoggedOut() {
-        BmobUser.logOut();
-        setCurrentUserAvatarUrl(null);
-    }
-
-    @Override
-    public void getCurrentUser(MyUser user) {
-//        mPreferencesHelper.getCurrentUser(user);
     }
 
     @Override
@@ -130,18 +129,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<MyUser> setCurrentUserName(String name) {
-        return mPreferencesHelper.setCurrentUserName(name);
-    }
-
-    @Override
     public String getCurrentUserPhoneNumber() {
         return mPreferencesHelper.getCurrentUserPhoneNumber();
-    }
-
-    @Override
-    public Observable<MyUser> setCurrentUserPhoneNumber(String phoneNumber) {
-        return mPreferencesHelper.setCurrentUserPhoneNumber(phoneNumber);
     }
 
     @Override
@@ -150,28 +139,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<MyUser> setCurrentUserAvatar(BmobFile avatar) {
-        return mPreferencesHelper.setCurrentUserAvatar(avatar);
-    }
-
-    @Override
     public int getCurrentUserLoggedInMode() {
         return mPreferencesHelper.getCurrentUserLoggedInMode();
     }
 
     @Override
-    public Observable<MyUser> setCurrentUserLoggedInMode(LoggedInMode mode) {
-        return mPreferencesHelper.setCurrentUserLoggedInMode(mode);
-    }
-
-    @Override
     public int getCurrentUserAccountType() {
         return mPreferencesHelper.getCurrentUserAccountType();
-    }
-
-    @Override
-    public Observable<MyUser> setCurrentUserAccountType(AccountType type) {
-        return mPreferencesHelper.setCurrentUserAccountType(type);
     }
 
     @Override
@@ -182,11 +156,6 @@ public class AppDataManager implements DataManager {
     @Override
     public String getCurrentUserAvatarUrl() {
         return mPreferencesHelper.getCurrentUserAvatarUrl();
-    }
-
-    @Override
-    public void setCurrentUserAvatarUrl(String avatarUrl) {
-        mPreferencesHelper.setCurrentUserAvatarUrl(avatarUrl);
     }
 
     @Override

@@ -15,10 +15,6 @@ public interface DataManager extends DBHelper, ApiHelper, PreferencesHelper {
 
     Observable<Boolean> seedAppSettings();
 
-    void setUserAsLoggedOut();
-
-    void getCurrentUser(MyUser user);
-
     enum LoggedInMode {
 
         LOGGED_IN_MODE_LOGGED_OUT(0),

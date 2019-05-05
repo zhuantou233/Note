@@ -10,6 +10,7 @@ import com.tao.note.data.DataManager;
 import com.tao.note.data.model.db.MyUser;
 import com.tao.note.ui.base.BaseViewModel;
 import com.tao.note.utils.L;
+import com.tao.note.utils.Util;
 import com.tao.note.utils.rx.SchedulerProvider;
 
 import java.io.File;
@@ -66,65 +67,77 @@ public class AccountDetailViewModel extends BaseViewModel<AccountDetailNavigator
     }
 
     public void onCancelClick() {
+        onDataLoad();
         getNavigator().dismissDialog();
     }
 
     public void onNameConfirmClick() {
-        setIsLoading(true);
-        getDataManager()
-                .uploadUserName(userName.get())
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(new DefaultObserver<MyUser>() {
-                    @Override
-                    public void onNext(MyUser user) {
-                        setIsLoading(false);
-                        L.i("更新成功");
-                        getDataManager().setCurrentUser(user);
-                        getNavigator().dismissDialog();
-                    }
+        if (Util.isCodeFormatValid(userName.get())) {
+            setIsLoading(true);
+            getDataManager()
+                    .uploadUserName(userName.get())
+                    .subscribeOn(getSchedulerProvider().io())
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribe(new DefaultObserver<MyUser>() {
+                        @Override
+                        public void onNext(MyUser user) {
+                            setIsLoading(false);
+                            L.i("更新成功");
+                            getDataManager().setCurrentUser(user);
+                            getNavigator().handleError(new Throwable("更新成功"));
+                            getNavigator().dismissDialog();
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        setIsLoading(false);
-                        L.i("更新失败：" + e.getMessage() + "\n");
-                        getNavigator().handleError(e);
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            setIsLoading(false);
+                            L.i("更新失败：" + e.getMessage() + "\n");
+                            getNavigator().handleError(e);
+                        }
 
-                    @Override
-                    public void onComplete() {
+                        @Override
+                        public void onComplete() {
 
-                    }
-                });
+                        }
+                    });
+        } else {
+            getNavigator().handleError(new Throwable("名字不能为空"));
+        }
     }
 
     public void onPhoneConfirmClick() {
-        setIsLoading(true);
-        getDataManager()
-                .uploadUserPhoneNumber(userPhoneNumber.get())
-                .subscribeOn(getSchedulerProvider().io())
-                .observeOn(getSchedulerProvider().ui())
-                .subscribe(new DefaultObserver<MyUser>() {
-                    @Override
-                    public void onNext(MyUser user) {
-                        setIsLoading(false);
-                        L.i("更新成功");
-                        getDataManager().setCurrentUser(user);
-                        getNavigator().dismissDialog();
-                    }
+        if (Util.isPhoneFormatValid(userPhoneNumber.get())) {
+            setIsLoading(true);
+            getDataManager()
+                    .uploadUserPhoneNumber(userPhoneNumber.get())
+                    .subscribeOn(getSchedulerProvider().io())
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribe(new DefaultObserver<MyUser>() {
+                        @Override
+                        public void onNext(MyUser user) {
+                            setIsLoading(false);
+                            L.i("更新成功");
+                            getDataManager().setCurrentUser(user);
+                            getNavigator().handleError(new Throwable("更新成功"));
+                            getNavigator().dismissDialog();
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        setIsLoading(false);
-                        L.i("更新失败：" + e.getMessage() + "\n");
-                        getNavigator().handleError(e);
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            setIsLoading(false);
+                            L.i("更新失败：" + e.getMessage() + "\n");
+                            getNavigator().handleError(e);
+                        }
 
-                    @Override
-                    public void onComplete() {
+                        @Override
+                        public void onComplete() {
 
-                    }
-                });
+                        }
+                    });
+        } else {
+            getNavigator().handleError(new Throwable("手机号格式不正确"));
+        }
+
     }
 
     public void onUploadAvatar(File file) {
@@ -139,8 +152,8 @@ public class AccountDetailViewModel extends BaseViewModel<AccountDetailNavigator
                     public void onNext(MyUser user) {
                         setIsLoading(false);
                         L.i("更新成功");
-                        L.i(user.getAvatar().getUrl());
                         getDataManager().setCurrentUser(user);
+                        getNavigator().handleError(new Throwable("更新成功"));
                         onDataLoad();
                     }
 

@@ -65,12 +65,12 @@ public class ResetPasswordViewModel extends BaseViewModel<ResetPasswordNavigator
                 .doResetPassword(phone, password, code)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(new DefaultObserver<BmobException>() {
+                .subscribe(new DefaultObserver<MyUser>() {
                     @Override
-                    public void onNext(BmobException e) {
+                    public void onNext(MyUser user) {
                         setIsLoading(false);
                         L.i("重置成功");
-                        getDataManager().setCurrentUser(BmobUser.getCurrentUser(MyUser.class));
+                        getDataManager().setCurrentUser(user);
                         getNavigator().openMainActivity();
                     }
 

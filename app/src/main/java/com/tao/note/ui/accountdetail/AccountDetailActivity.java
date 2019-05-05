@@ -22,6 +22,7 @@ import com.tao.note.BR;
 import com.tao.note.R;
 import com.tao.note.ViewModelProviderFactory;
 import com.tao.note.databinding.ActivityAccountDetailBinding;
+import com.tao.note.ui.accountdetail.changepassword.ChangeUserPasswordDialog;
 import com.tao.note.ui.accountdetail.changeusername.ChangeUserNameDialog;
 import com.tao.note.ui.accountdetail.changeuserphonenumber.ChangeUserPhoneNumberDialog;
 import com.tao.note.ui.base.BaseActivity;
@@ -33,6 +34,7 @@ import com.yalantis.ucrop.UCropActivity;
 
 
 import java.io.File;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -127,7 +129,11 @@ public class AccountDetailActivity extends BaseActivity<ActivityAccountDetailBin
 
     @Override
     public void handleError(Throwable throwable) {
-//        ToastUtil.getInstance(this).shortToast(getString(R.string.update_fail));
+        if (throwable.getCause() instanceof UnknownHostException) {
+            ToastUtil.getInstance(this).shortToast(getString(R.string.no_network));
+        } else {
+            ToastUtil.getInstance(this).shortToast(throwable.getMessage());
+        }
         L.i(throwable.getMessage());
     }
 
@@ -253,6 +259,7 @@ public class AccountDetailActivity extends BaseActivity<ActivityAccountDetailBin
                 ChangeUserPhoneNumberDialog.newInstance().show(getSupportFragmentManager());
                 break;
             case R.id.password_form:
+                ChangeUserPasswordDialog.newInstance().show(getSupportFragmentManager());
                 break;
             case R.id.delete_account_form:
                 break;

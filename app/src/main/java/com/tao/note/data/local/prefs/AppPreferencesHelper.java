@@ -40,7 +40,6 @@ public class AppPreferencesHelper implements PreferencesHelper {
         user = BmobUser.getCurrentUser(MyUser.class);
     }
 
-
     @Override
     public String getCurrentUserName() {
         if (user == null || user.getNickName() == null) {
@@ -51,27 +50,8 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public Observable<MyUser> setCurrentUserName(String name) {
-        if (user != null) {
-            user.setNickName(name);
-            return updateToBmob();
-        }
-        return null;
-    }
-
-
-    @Override
     public String getCurrentUserPhoneNumber() {
         return user == null ? AppConstants.DEFAULT_USER_PHONE : user.getMobilePhoneNumber();
-    }
-
-    @Override
-    public Observable<MyUser> setCurrentUserPhoneNumber(String phoneNumber) {
-        if (user != null) {
-            user.setMobilePhoneNumber(phoneNumber);
-            return updateToBmob();
-        }
-        return null;
     }
 
     @Override
@@ -80,25 +60,10 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public Observable<MyUser> setCurrentUserAvatar(BmobFile avatar) {
-        if (user != null) {
-            user.setAvatar(avatar);
-            return updateToBmob();
-        }
-        return null;
-    }
-
-    @Override
     public int getCurrentUserLoggedInMode() {
-        return user == null ?
-                DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType()
-                : DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_IN.getType();
-    }
-
-    @Override
-    public Observable<MyUser> setCurrentUserLoggedInMode(DataManager.LoggedInMode mode) {
-        // todo
-        return null;
+        return BmobUser.isLogin() ?
+                DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_IN.getType()
+                : DataManager.LoggedInMode.LOGGED_IN_MODE_LOGGED_OUT.getType();
     }
 
     @Override
@@ -106,15 +71,6 @@ public class AppPreferencesHelper implements PreferencesHelper {
         return user == null ?
                 DataManager.AccountType.ACCOUNT_TYPE_NORMAL.getType()
                 : user.getAccountType();
-    }
-
-    @Override
-    public Observable<MyUser> setCurrentUserAccountType(DataManager.AccountType type) {
-        if (user != null) {
-            user.setAccountType(type.getType());
-            return updateToBmob();
-        }
-        return null;
     }
 
     @Override
@@ -143,11 +99,6 @@ public class AppPreferencesHelper implements PreferencesHelper {
     }
 
     @Override
-    public void setCurrentUserAvatarUrl(String avatarUrl) {
-//        mPrefs.edit().putString(PREF_KEY_CURRENT_USER_AVATAR_URL, avatarUrl).apply();
-    }
-
-    @Override
     public void setCurrentUser(MyUser myUser) {
         if (myUser != null) {
             user = myUser;
@@ -156,20 +107,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public MyUser getCurrentUser() {
-        return user;
+        return BmobUser.getCurrentUser(MyUser.class);
     }
 
-    private Observable<MyUser> updateToBmob() {
-        return Observable.create(emitter -> user.update(new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null) {
-                    emitter.onNext(user);
-                    emitter.onComplete();
-                } else {
-                    emitter.onError(e);
-                }
-            }
-        }));
-    }
 }

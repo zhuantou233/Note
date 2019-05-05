@@ -22,7 +22,9 @@ public interface ApiHelper {
 
     Observable<MyUser> doSignInWithCode(String phone, String code);
 
-    Observable<BmobException> doResetPassword(String phone, String password, String code);
+    Observable<MyUser> doResetPassword(String phone, String password, String code);
+
+    Observable<MyUser> doUpdatePassword(String oldPassword, String newPassword);
 
     void doLogout();
 
@@ -37,5 +39,7 @@ public interface ApiHelper {
     Observable<MyUser> uploadUserPhoneNumber(String phone);
 
     Observable<MyUser> uploadUserAccountType(DataManager.AccountType type);
+
+    Observable<MyUser> fetchUserInfo();
 
 }
