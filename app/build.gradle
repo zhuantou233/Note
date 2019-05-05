@@ -36,6 +36,7 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+    implementation "androidx.annotation:annotation:$rootProject.annotationVersion"
 
     implementation "com.squareup.okio:okio:$rootProject.okioVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
@@ -87,9 +88,8 @@ dependencies {
     implementation "io.github.inflationx:calligraphy3:$rootProject.calligraphyVersion"
     implementation "io.github.inflationx:viewpump:$rootProject.viewpumpVersion"
 
-    // placeholderview
-    implementation "com.mindorks.android:placeholderview:$rootProject.placeholderviewVersion"
-    annotationProcessor "com.mindorks.android:placeholderview-compiler:$rootProject.placeholderviewVersion"
+    // foldingcell
+    implementation "com.ramotion.foldingcell:folding-cell:$rootProject.foldingcellVersion"
 
     // easypermissions
     implementation "pub.devrel:easypermissions:$rootProject.easypermissionsVersion"
@@ -99,6 +99,9 @@ dependencies {
 
     // logger
     implementation "com.orhanobut:logger:$rootProject.loggerVersion"
+
+    // materialdrawer
+    implementation "com.mikepenz:materialdrawer:$rootProject.materialdrawerVersion"
 
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     androidTestImplementation "androidx.test:runner:$rootProject.runnerVersion"

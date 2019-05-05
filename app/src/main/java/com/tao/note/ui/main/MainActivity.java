@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.navigation.NavigationView;
-import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.tao.note.BR;
 import com.tao.note.R;
 import com.tao.note.ViewModelProviderFactory;
@@ -50,7 +49,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     private ActivityMainBinding mActivityMainBinding;
     private MainViewModel mMainViewModel;
-    private SwipePlaceHolderView mContainerView;
     private DrawerLayout mDrawer;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
@@ -147,7 +145,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void openProfileActivity() {
-        mDrawer.closeDrawer(GravityCompat.START);
         Intent intent = ProfileActivity.newIntent(MainActivity.this);
         startActivity(intent);
     }
@@ -175,7 +172,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mDrawer = mActivityMainBinding.drawerView;
         mToolbar = mActivityMainBinding.toolbar;
         mNavigationView = mActivityMainBinding.navView;
-        mContainerView = mActivityMainBinding.container;
 
         setSupportActionBar(mToolbar);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
@@ -210,13 +206,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 item -> {
                     mDrawer.closeDrawer(GravityCompat.START);
                     switch (item.getItemId()) {
-                        case R.id.nav_camera:
+                        case R.id.nav_today:
                             return true;
-                        case R.id.nav_gallery:
+                        case R.id.nav_week:
                             return true;
-                        case R.id.nav_manage:
+                        case R.id.nav_filter:
                             return true;
-                        case R.id.nav_logout:
+                        case R.id.nav_settings:
                             mMainViewModel.onLogout();
                             return true;
                         default:

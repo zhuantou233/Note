@@ -65,4 +65,9 @@
     <string name="need_permission">此功能需要开启相关权限</string>
     <string name="old_password">旧密码</string>
     <string name="new_password">新密码</string>
+    <string name="settings">设置</string>
+    <string name="today">今天</string>
+    <string name="all">全部</string>
+    <string name="week">一周以内</string>
+    <string name="filter">过滤器</string>
 </resources>

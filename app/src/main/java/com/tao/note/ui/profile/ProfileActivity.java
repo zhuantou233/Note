@@ -12,6 +12,7 @@ import androidx.core.app.TaskStackBuilder;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.tao.note.BR;
 import com.tao.note.R;
 import com.tao.note.ViewModelProviderFactory;
@@ -108,8 +109,6 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding, Profil
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
-
     }
 
     @Override

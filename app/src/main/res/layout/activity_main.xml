@@ -57,11 +57,6 @@
 
                     </com.google.android.material.appbar.AppBarLayout>
 
-                    <com.mindorks.placeholderview.SwipePlaceHolderView
-                        android:id="@+id/container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
                 </LinearLayout>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -85,8 +80,8 @@
                 android:layout_gravity="start"
                 android:background="@color/white"
                 app:itemBackground="@color/white"
-                app:itemIconTint="@color/black_effective"
-                app:itemTextColor="@color/black_effective"
+                app:itemIconTint="@color/colorTheme"
+                app:itemTextColor="@color/textColorDark"
                 app:menu="@menu/activity_main_drawer" />
 
         </androidx.drawerlayout.widget.DrawerLayout>
