@@ -27,7 +27,10 @@ import com.tao.note.databinding.ActivityMainBinding;
 import com.tao.note.databinding.NavHeaderMainBinding;
 import com.tao.note.ui.base.BaseActivity;
 import com.tao.note.ui.login.LoginActivity;
+import com.tao.note.ui.main.all.RecordAllFragment;
+import com.tao.note.ui.main.createrecord.CreateRecordFragment;
 import com.tao.note.ui.main.today.RecordTodayFragment;
+import com.tao.note.ui.main.week.RecordWeekFragment;
 import com.tao.note.ui.profile.ProfileActivity;
 
 import javax.inject.Inject;
@@ -151,6 +154,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
+    public void showCreateRecordFragment() {
+        if (getSupportFragmentManager() != null &&
+                getSupportFragmentManager().findFragmentByTag(CreateRecordFragment.TAG) == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .add(R.id.clRootView, CreateRecordFragment.newInstance(), CreateRecordFragment.TAG)
+                    .commit();
+        }
+    }
+
+    @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
     }
@@ -195,6 +210,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mDrawer.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
         setupNavMenu();
+        showRecordTodayFragment();
     }
 
     private void setupNavMenu() {
@@ -218,6 +234,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 fragmentClass = RecordTodayFragment.class;
                 break;
             case R.id.nav_week:
+                fragmentClass = RecordWeekFragment.class;
+                break;
+            case R.id.nav_all:
+                fragmentClass = RecordAllFragment.class;
                 break;
             case R.id.nav_filter:
                 break;
@@ -238,6 +258,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
         mDrawer.closeDrawer(GravityCompat.START);
+    }
+
+    private void showRecordTodayFragment() {
+        setTitle(getString(R.string.today));
+        if (getSupportFragmentManager() != null &&
+                getSupportFragmentManager().findFragmentByTag(RecordTodayFragment.TAG) == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .add(R.id.fragment_container, RecordTodayFragment.newInstance(), RecordTodayFragment.TAG)
+                    .commit();
+        }
     }
 
     private void unlockDrawer() {

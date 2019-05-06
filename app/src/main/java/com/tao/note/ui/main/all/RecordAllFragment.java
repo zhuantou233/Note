@@ -1,4 +1,4 @@
-package com.tao.note.ui.main.today;
+package com.tao.note.ui.main.all;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.tao.note.BR;
 import com.tao.note.R;
 import com.tao.note.ViewModelProviderFactory;
-import com.tao.note.databinding.FragmentRecordTodayBinding;
+import com.tao.note.databinding.FragmentRecordAllBinding;
 import com.tao.note.ui.base.BaseFragment;
 
 import javax.inject.Inject;
@@ -19,17 +19,18 @@ import javax.inject.Inject;
  * Created by Tao Zhou on 2019/5/5
  * Package name: com.tao.note.ui.main
  */
-public class RecordTodayFragment extends BaseFragment<FragmentRecordTodayBinding, RecordTodayViewModel> implements RecordTodayNavigator {
+public class RecordAllFragment extends BaseFragment<FragmentRecordAllBinding, RecordAllViewModel> implements RecordAllNavigator {
 
-    public static final String TAG = RecordTodayFragment.class.getSimpleName();
+    public static final String TAG = RecordAllFragment.class.getSimpleName();
+
     @Inject
     ViewModelProviderFactory factory;
-    private RecordTodayViewModel mRecordTodayViewModel;
-    private FragmentRecordTodayBinding mFragmentRecordTodayBinding;
+    private RecordAllViewModel mRecordAllViewModel;
+    private FragmentRecordAllBinding mFragmentRecordAllBinding;
 
-    public static RecordTodayFragment newInstance() {
+    public static RecordAllFragment newInstance() {
         Bundle args = new Bundle();
-        RecordTodayFragment fragment = new RecordTodayFragment();
+        RecordAllFragment fragment = new RecordAllFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -41,25 +42,25 @@ public class RecordTodayFragment extends BaseFragment<FragmentRecordTodayBinding
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_record_today;
+        return R.layout.fragment_record_all;
     }
 
     @Override
-    public RecordTodayViewModel getViewModel() {
-        mRecordTodayViewModel = ViewModelProviders.of(this, factory).get(RecordTodayViewModel.class);
-        return mRecordTodayViewModel;
+    public RecordAllViewModel getViewModel() {
+        mRecordAllViewModel = ViewModelProviders.of(this, factory).get(RecordAllViewModel.class);
+        return mRecordAllViewModel;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRecordTodayViewModel.setNavigator(this);
+        mRecordAllViewModel.setNavigator(this);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mFragmentRecordTodayBinding = getViewDataBinding();
+        mFragmentRecordAllBinding = getViewDataBinding();
     }
 
     @Override

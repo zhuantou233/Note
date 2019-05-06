@@ -10,7 +10,10 @@ import com.tao.note.ui.login.signin.SignInViewModel;
 import com.tao.note.ui.login.signinwithcode.SignInWithCodeViewModel;
 import com.tao.note.ui.login.signup.SignUpViewModel;
 import com.tao.note.ui.main.MainViewModel;
+import com.tao.note.ui.main.all.RecordAllViewModel;
+import com.tao.note.ui.main.createrecord.CreateRecordViewModel;
 import com.tao.note.ui.main.today.RecordTodayViewModel;
+import com.tao.note.ui.main.week.RecordWeekViewModel;
 import com.tao.note.ui.profile.ProfileViewModel;
 import com.tao.note.ui.splash.SplashViewModel;
 import com.tao.note.utils.rx.SchedulerProvider;
@@ -77,6 +80,15 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(RecordTodayViewModel.class)) {
             //noinspection unchecked
             return (T) new RecordTodayViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RecordWeekViewModel.class)) {
+            //noinspection unchecked
+            return (T) new RecordWeekViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(RecordAllViewModel.class)) {
+            //noinspection unchecked
+            return (T) new RecordAllViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(CreateRecordViewModel.class)) {
+            //noinspection unchecked
+            return (T) new CreateRecordViewModel(dataManager, schedulerProvider);
         }
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

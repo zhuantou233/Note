@@ -72,6 +72,7 @@
                     android:layout_margin="@dimen/fab_margin"
                     android:clickable="true"
                     android:focusable="true"
+                    android:onClick="@{()->viewModel.onFABClick()}"
                     app:backgroundTint="@color/colorTheme"
                     app:srcCompat="@drawable/ic_add_white_24dp" />
 

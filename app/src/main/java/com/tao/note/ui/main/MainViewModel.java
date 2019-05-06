@@ -73,4 +73,8 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
     public void onProfileClick() {
         getNavigator().openProfileActivity();
     }
+
+    public void onFABClick() {
+        getNavigator().showCreateRecordFragment();
+    }
 }
