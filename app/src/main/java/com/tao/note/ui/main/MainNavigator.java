@@ -13,5 +13,5 @@ public interface MainNavigator {
 
     void openProfileActivity();
 
-    void showCreateRecordFragment();
+    void openCreateRecordActivity();
 }

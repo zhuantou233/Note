@@ -15,6 +15,7 @@ public class Record extends BmobObject {
     private Float money;                // 金额
     private Float unitPrice;            // 单价
     private Float quantity;             // 数量
+    private String unit;                // 单位
     private BmobDate recordDate;        // 记录时间
     private Boolean isIncomeOrExpense;  // 收入还是支出
     private String recordType;          // 支出类型
@@ -24,12 +25,13 @@ public class Record extends BmobObject {
     private List<BmobFile> photos;      // 照片
     private BmobRelation targets;       // 关联对象，对应contact
 
-    public Record(Float money, Float unitPrice, Float quantity, BmobDate recordDate,
+    public Record(Float money, Float unitPrice, Float quantity, String unit, BmobDate recordDate,
                   Boolean isIncomeOrExpense, String recordType, String moneyType,
                   String extraInfo, MyUser author, List<BmobFile> photos, BmobRelation targets) {
         this.money = money;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
+        this.unit = unit;
         this.recordDate = recordDate;
         this.isIncomeOrExpense = isIncomeOrExpense;
         this.recordType = recordType;
@@ -62,6 +64,14 @@ public class Record extends BmobObject {
 
     public void setMoney(Float money) {
         this.money = money;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public BmobDate getRecordDate() {

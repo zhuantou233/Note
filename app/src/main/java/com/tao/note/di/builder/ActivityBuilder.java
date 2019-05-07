@@ -4,6 +4,7 @@ import com.tao.note.ui.accountdetail.AccountDetailActivity;
 import com.tao.note.ui.accountdetail.changepassword.ChangeUserPasswordDialogProvider;
 import com.tao.note.ui.accountdetail.changeusername.ChangeUserNameDialogProvider;
 import com.tao.note.ui.accountdetail.changeuserphonenumber.ChangeUserPhoneNumberDialogProvider;
+import com.tao.note.ui.createrecord.CreateRecordActivity;
 import com.tao.note.ui.login.LoginActivity;
 import com.tao.note.ui.login.bottomdialog.ResetDialogProvider;
 import com.tao.note.ui.login.resetpassword.ResetPasswordFragmentProvider;
@@ -12,7 +13,6 @@ import com.tao.note.ui.login.signinwithcode.SignInWithCodeFragmentProvider;
 import com.tao.note.ui.login.signup.SignUpFragmentProvider;
 import com.tao.note.ui.main.MainActivity;
 import com.tao.note.ui.main.all.RecordAllFragmentProvider;
-import com.tao.note.ui.main.createrecord.CreateRecordFragmentProvider;
 import com.tao.note.ui.main.today.RecordTodayFragmentProvider;
 import com.tao.note.ui.main.week.RecordWeekFragmentProvider;
 import com.tao.note.ui.profile.ProfileActivity;
@@ -46,8 +46,7 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = {
             RecordTodayFragmentProvider.class,
             RecordWeekFragmentProvider.class,
-            RecordAllFragmentProvider.class,
-            CreateRecordFragmentProvider.class
+            RecordAllFragmentProvider.class
     })
     abstract MainActivity bindMainActivity();
 
@@ -63,4 +62,7 @@ public abstract class ActivityBuilder {
             ChangeUserPasswordDialogProvider.class
     })
     abstract AccountDetailActivity bindAccountDetailActivity();
+
+    @ContributesAndroidInjector
+    abstract CreateRecordActivity bindCreateRecordActivity();
 }

@@ -26,9 +26,9 @@ import com.tao.note.ViewModelProviderFactory;
 import com.tao.note.databinding.ActivityMainBinding;
 import com.tao.note.databinding.NavHeaderMainBinding;
 import com.tao.note.ui.base.BaseActivity;
+import com.tao.note.ui.createrecord.CreateRecordActivity;
 import com.tao.note.ui.login.LoginActivity;
 import com.tao.note.ui.main.all.RecordAllFragment;
-import com.tao.note.ui.main.createrecord.CreateRecordFragment;
 import com.tao.note.ui.main.today.RecordTodayFragment;
 import com.tao.note.ui.main.week.RecordWeekFragment;
 import com.tao.note.ui.profile.ProfileActivity;
@@ -154,15 +154,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
-    public void showCreateRecordFragment() {
-        if (getSupportFragmentManager() != null &&
-                getSupportFragmentManager().findFragmentByTag(CreateRecordFragment.TAG) == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .disallowAddToBackStack()
-                    .add(R.id.clRootView, CreateRecordFragment.newInstance(), CreateRecordFragment.TAG)
-                    .commit();
-        }
+    public void openCreateRecordActivity() {
+        Intent intent = CreateRecordActivity.newIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     @Override

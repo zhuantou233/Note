@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.tao.note.ui.createrecord.CreateRecordActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tao.note.ui.createrecord.CreateRecordViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_create_record">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    style="@style/InputFormImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:src="@drawable/ic_isincomeorexpense" />
+
+                <TextView
+                    style="@style/RecordMenuContentStyle"
+                    android:text="支出" />
+
+                <ImageView
+                    style="@style/ExpandImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_expand_more" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line_grey" />
+
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    style="@style/InputFormImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:src="@drawable/ic_moneytype" />
+
+                <TextView
+                    style="@style/RecordMenuContentStyle"
+                    android:text="交易方式" />
+
+                <ImageView
+                    style="@style/ExpandImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_expand_more" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line_grey" />
+
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    style="@style/InputFormImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:src="@drawable/ic_recordtype" />
+
+                <TextView
+                    style="@style/RecordMenuContentStyle"
+                    android:text="项目种类" />
+
+                <ImageView
+                    style="@style/ExpandImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_expand_more" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line_grey" />
+
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    style="@style/InputFormImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_quantity" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/unit_price"
+                        style="@style/InputFormNumStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="单价"
+                        android:maxLength="10" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_multiply" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/quantity"
+                        style="@style/InputFormNumStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="数量"
+                        android:maxLength="10" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/unit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="单位"
+                        android:inputType="text"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line_grey" />
+
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    style="@style/InputFormImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_money" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/money"
+                        style="@style/InputFormNumStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="总金额"
+                        android:maxLength="10" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line_grey" />
+
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    style="@style/InputFormImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="1dp"
+                    android:paddingEnd="1dp"
+                    android:src="@drawable/ic_recorddate" />
+
+                <TextView
+                    style="@style/RecordMenuContentStyle"
+                    android:text="时间" />
+
+                <ImageView
+                    style="@style/ExpandImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_expand_more" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line_grey" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line_grey" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/split_line_grey" />
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
+

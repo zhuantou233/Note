@@ -193,4 +193,26 @@
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
+    <style name="ExpandImageStyle">
+        <item name="android:layout_width">@dimen/image_size_common</item>
+        <item name="android:layout_height">@dimen/image_size_common</item>
+        <item name="android:layout_margin">@dimen/margin_special</item>
+    </style>
+
+    <style name="RecordMenuContentStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/text_size_huge</item>
+        <item name="android:textColor">@color/textColorDark</item>
+    </style>
+
+    <style name="RecordMenuLayoutStyle">
+        <item name="android:padding">@dimen/padding_medium</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingTop">@dimen/padding_small</item>
+        <item name="android:paddingBottom">@dimen/padding_small</item>
+    </style>
+
 </resources>

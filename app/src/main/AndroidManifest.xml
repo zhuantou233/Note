@@ -53,6 +53,10 @@
             android:parentActivityName=".ui.profile.ProfileActivity" />
 
         <activity
+            android:name=".ui.createrecord.CreateRecordActivity"
+            android:launchMode="singleTop" />
+
+        <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

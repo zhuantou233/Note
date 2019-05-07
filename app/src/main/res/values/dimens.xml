@@ -3,6 +3,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="app_icon_size">44dp</dimen>
     <dimen name="app_name_size">40sp</dimen>
+    <dimen name="image_size_common">24dp</dimen>
     <dimen name="image_size_medium">36dp</dimen>
     <dimen name="input_form_height">60dp</dimen>
 

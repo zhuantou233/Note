@@ -11,7 +11,7 @@ import com.tao.note.ui.login.signinwithcode.SignInWithCodeViewModel;
 import com.tao.note.ui.login.signup.SignUpViewModel;
 import com.tao.note.ui.main.MainViewModel;
 import com.tao.note.ui.main.all.RecordAllViewModel;
-import com.tao.note.ui.main.createrecord.CreateRecordViewModel;
+import com.tao.note.ui.createrecord.CreateRecordViewModel;
 import com.tao.note.ui.main.today.RecordTodayViewModel;
 import com.tao.note.ui.main.week.RecordWeekViewModel;
 import com.tao.note.ui.profile.ProfileViewModel;

@@ -75,6 +75,6 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
     }
 
     public void onFABClick() {
-        getNavigator().showCreateRecordFragment();
+        getNavigator().openCreateRecordActivity();
     }
 }
