@@ -70,4 +70,19 @@
     <string name="all">全部</string>
     <string name="week">一周以内</string>
     <string name="filter">过滤器</string>
+
+    <!--CreateRecord-->
+    <string name="income">收入</string>
+    <string name="expense">支出</string>
+    <string name="income_or_expense">收入或支出</string>
+    <string name="money_type">交易方式</string>
+    <string name="record_type">项目种类</string>
+    <string name="record_date">记录时间</string>
+    <string name="ok">确认</string>
+    <string name="unit_price">单价</string>
+    <string name="unit">单位</string>
+    <string name="quantity">数量</string>
+    <string name="total_money">总金额</string>
+    <string name="extra_info">补充说明</string>
+    <string name="yuan">元</string>
 </resources>

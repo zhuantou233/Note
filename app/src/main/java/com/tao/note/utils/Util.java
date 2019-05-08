@@ -6,8 +6,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import cn.bmob.v3.datatype.BmobDate;
 
 public final class Util {
     // String regExp = "^[1](([3|5|8][\\\\d])|([4][5,6,7,8,9])|([6][5,6])|([7][3,4,5,6,7,8])|([9][8,9]))[\\\\d]{8}$";
@@ -50,6 +55,13 @@ public final class Util {
 
     public static boolean isCodeFormatValid(String code) {
         return !TextUtils.isEmpty(code);
+    }
+
+    public static String getCurrentDate() {
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("+8"));
+        String pattern = "yyyy-MM-dd HH:mm";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return formatter.format(now);
     }
 
 

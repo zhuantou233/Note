@@ -30,7 +30,7 @@ task clean(type: Delete) {
 // Define versions in a single place
 ext {
     // Sdk and tools
-    minSdkVersion = 24
+    minSdkVersion = 26
     targetSdkVersion = 28
     compileSdkVersion = 28
 //    buildToolsVersion = '28.0.3'
@@ -78,6 +78,8 @@ ext {
     loggerVersion = '2.2.0'
 
     materialdrawerVersion = '6.1.2'
+
+    dateTimePickerVersion = '2.0'
     // Test dependencies
     junitVersion = '4.12'
     espressoVersion = '3.2.0-alpha03'

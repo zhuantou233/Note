@@ -3,6 +3,9 @@ package com.tao.note.data.local.prefs;
 import com.tao.note.data.model.db.MyUser;
 
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+
 import cn.bmob.v3.datatype.BmobFile;
 
 /**

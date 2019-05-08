@@ -211,8 +211,19 @@
     <style name="RecordMenuLayoutStyle">
         <item name="android:padding">@dimen/padding_medium</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:paddingTop">@dimen/padding_small</item>
-        <item name="android:paddingBottom">@dimen/padding_small</item>
+    </style>
+
+    <style name="RecordMenuIconStyle">
+        <item name="android:layout_marginStart">@dimen/margin_special</item>
+        <item name="android:layout_marginEnd">@dimen/margin_common</item>
+        <item name="android:layout_width">@dimen/image_size_medium</item>
+        <item name="android:layout_height">@dimen/image_size_medium</item>
+    </style>
+
+    <style name="RecordMenuNumStyle">
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
     </style>
 
 </resources>

@@ -10,6 +10,8 @@ import com.tao.note.utils.AppConstants;
 import com.tao.note.utils.L;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import javax.inject.Inject;
 
@@ -29,6 +31,8 @@ import io.reactivex.ObservableOnSubscribe;
 public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_KEY_CURRENT_USER_AVATAR_URL = "PREF_KEY_CURRENT_USER_AVATAR_URL";
+
+    private static final String PREF_KEY_MONEY_TYPE_SET = "PREF_KEY_MONEY_TYPE_SET";
 
     private final SharedPreferences mPrefs;
 

@@ -29,18 +29,17 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="@{()->viewModel.onIncomeOrExpenseClick()}">
 
                 <ImageView
-                    style="@style/InputFormImageStyle"
+                    style="@style/RecordMenuIconStyle"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="3dp"
-                    android:paddingEnd="3dp"
                     android:src="@drawable/ic_isincomeorexpense" />
 
                 <TextView
                     style="@style/RecordMenuContentStyle"
-                    android:text="支出" />
+                    android:text="@{viewModel.isIncomeOrExpense ? @string/income : @string/expense}" />
 
                 <ImageView
                     style="@style/ExpandImageStyle"
@@ -60,18 +59,17 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="@{()->viewModel.onMoneyTypeClick()}">
 
                 <ImageView
-                    style="@style/InputFormImageStyle"
+                    style="@style/RecordMenuIconStyle"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="3dp"
-                    android:paddingEnd="3dp"
                     android:src="@drawable/ic_moneytype" />
 
                 <TextView
                     style="@style/RecordMenuContentStyle"
-                    android:text="交易方式" />
+                    android:text="@{viewModel.moneyType}" />
 
                 <ImageView
                     style="@style/ExpandImageStyle"
@@ -91,18 +89,17 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="@{()->viewModel.onRecordTypeClick()}">
 
                 <ImageView
-                    style="@style/InputFormImageStyle"
+                    style="@style/RecordMenuIconStyle"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="3dp"
-                    android:paddingEnd="3dp"
                     android:src="@drawable/ic_recordtype" />
 
                 <TextView
                     style="@style/RecordMenuContentStyle"
-                    android:text="项目种类" />
+                    android:text="@{viewModel.recordType}" />
 
                 <ImageView
                     style="@style/ExpandImageStyle"
@@ -122,22 +119,23 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    style="@style/InputFormImageStyle"
+                    style="@style/RecordMenuIconStyle"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_quantity" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/unit_price"
-                        style="@style/InputFormNumStyle"
+                        style="@style/RecordMenuNumStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="单价"
-                        android:maxLength="10" />
+                        android:hint="@string/unit_price"
+                        android:maxLength="10"
+                        android:text="@={viewModel.unitPrice}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,32 +148,34 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/quantity"
-                        style="@style/InputFormNumStyle"
+                        style="@style/RecordMenuNumStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="数量"
-                        android:maxLength="10" />
+                        android:hint="@string/quantity"
+                        android:maxLength="10"
+                        android:text="@={viewModel.quantity}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2.5">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/unit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="单位"
+                        android:hint="@string/unit"
                         android:inputType="text"
                         android:maxLength="5"
                         android:maxLines="1"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:text="@={viewModel.unit}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -192,22 +192,23 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    style="@style/InputFormImageStyle"
+                    style="@style/RecordMenuIconStyle"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_money" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/money"
-                        style="@style/InputFormNumStyle"
+                        style="@style/RecordMenuNumStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="总金额"
-                        android:maxLength="10" />
+                        android:hint="@string/total_money"
+                        android:maxLength="10"
+                        android:text="@={viewModel.money}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -224,18 +225,17 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true">
+                android:focusable="true"
+                android:onClick="@{()->viewModel.onRecordDateClick()}">
 
                 <ImageView
-                    style="@style/InputFormImageStyle"
+                    style="@style/RecordMenuIconStyle"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="1dp"
-                    android:paddingEnd="1dp"
                     android:src="@drawable/ic_recorddate" />
 
                 <TextView
                     style="@style/RecordMenuContentStyle"
-                    android:text="时间" />
+                    android:text="@{viewModel.recordDate.get().getDate()}" />
 
                 <ImageView
                     style="@style/ExpandImageStyle"
@@ -249,17 +249,140 @@
                 android:layout_height="1dp"
                 android:background="@color/split_line_grey" />
 
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <HorizontalScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scrollbars="none">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:chipSpacing="40dp"
+                        app:singleLine="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name" />
+
+                        <com.google.android.material.chip.Chip
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name" />
+                    </com.google.android.material.chip.ChipGroup>
+
+                </HorizontalScrollView>
+
+                <ImageView
+                    style="@style/ExpandImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_add" />
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/split_line_grey" />
 
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <HorizontalScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/image_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="@dimen/margin_common"
+                            app:placeholderImage="@drawable/ic_user" />
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="@dimen/margin_common"
+                            app:placeholderImage="@drawable/ic_user" />
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="@dimen/margin_common"
+                            app:placeholderImage="@drawable/ic_user" />
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_margin="@dimen/margin_common"
+                            app:placeholderImage="@drawable/ic_user" />
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <ImageView
+                    style="@style/ExpandImageStyle"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_add" />
+
+            </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/split_line_grey" />
 
+            <LinearLayout
+                style="@style/RecordMenuLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_task_place"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="top"
+                    android:hint="@string/extra_info"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:minLines="6"
+                    android:padding="@dimen/padding_small"
+                    android:text="@={viewModel.extraInfo}" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -103,6 +103,9 @@ dependencies {
     // materialdrawer
     implementation "com.mikepenz:materialdrawer:$rootProject.materialdrawerVersion"
 
+    // timepicker
+    implementation "com.github.Kunzisoft:Android-SwitchDateTimePicker:$rootProject.dateTimePickerVersion"
+
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     androidTestImplementation "androidx.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
