@@ -1,7 +1,9 @@
 package com.tao.note.ui.createrecord;
 
 import android.text.TextUtils;
+import android.widget.TextView;
 
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
@@ -136,6 +138,18 @@ public class CreateRecordViewModel extends BaseViewModel<CreateRecordNavigator> 
 
     public void onRecordDateClick() {
         getNavigator().showRecordDateDialog();
+    }
+
+    @BindingAdapter(value = {"money", "unitPrice", "quantity"}, requireAll = false)
+    public static void setText(TextView view, String money, String unitPrice, String quantity) {
+        if (!TextUtils.isEmpty(money)) {
+            view.setText(money);
+        } else if (!TextUtils.isEmpty(unitPrice) && !TextUtils.isEmpty(quantity)) {
+            Float result = Float.parseFloat(unitPrice) * Float.parseFloat(quantity);
+            view.setText(String.valueOf(result));
+        } else {
+            view.setText("0");
+        }
     }
 
 }

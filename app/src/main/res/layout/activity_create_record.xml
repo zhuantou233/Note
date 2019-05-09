@@ -27,83 +27,11 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_tool_bar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="240dp"
                 android:fitsSystemWindows="true"
                 app:elevation="0dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:statusBarScrim="?attr/colorAccent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginBottom="@dimen/margin_small"
-                    android:orientation="vertical"
-                    android:paddingStart="@dimen/padding_huge"
-                    android:paddingTop="50dp"
-                    android:paddingEnd="@dimen/padding_medium"
-                    android:paddingBottom="@dimen/padding_huge">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding_small">
-
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.recordType}"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_huge" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="end"
-                            android:text="0"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_huge" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="@dimen/padding_small"
-                            android:text="@string/yuan"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_huge" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/padding_small">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@{viewModel.isIncomeOrExpense ? @string/income : @string/expense}"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_huge" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="end"
-                            android:text="@{viewModel.recordDate.get().getDate()}"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_huge" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -119,8 +47,83 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-
         </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_huge"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_huge"
+            android:orientation="vertical"
+            app:layout_anchor="@id/app_bar"
+            app:layout_behavior="com.tao.note.ui.custom.CreateRecordAppBarBehavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_small">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.recordType}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_huge" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_huge"
+                    app:money="@{viewModel.money}"
+                    app:quantity="@{viewModel.quantity}"
+                    app:unitPrice="@{viewModel.unitPrice}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_small"
+                    android:paddingEnd="@dimen/padding_small"
+                    android:text="@string/yuan"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_huge" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_small">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.isIncomeOrExpense ? @string/income : @string/expense}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_huge" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/padding_small"
+                    android:paddingEnd="@dimen/padding_small"
+                    android:singleLine="true"
+                    android:text="@{viewModel.recordDate.get().getDate()}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_huge" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <include
             layout="@layout/content_scrolling"
