@@ -85,4 +85,5 @@
     <string name="total_money">总金额</string>
     <string name="extra_info">补充说明</string>
     <string name="yuan">元</string>
+    <string name="space">:  </string>
 </resources>

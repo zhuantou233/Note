@@ -2,6 +2,7 @@ package com.tao.note;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
@@ -23,15 +24,15 @@ import io.github.inflationx.viewpump.ViewPump;
 public class NoteApp extends Application implements HasActivityInjector {
 
 //    private static NoteApp INSTANCE = null;
-//    private static Context context;
+    private static Context context;
 //
 //    public static NoteApp getInstance() {
 //        return INSTANCE;
 //    }
 //
-//    public static Context getContext() {
-//        return context;
-//    }
+    public static Context getContext() {
+        return context;
+    }
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
@@ -49,6 +50,8 @@ public class NoteApp extends Application implements HasActivityInjector {
         super.onCreate();
 //        INSTANCE = this;
 //        context = getApplicationContext();
+        context = getBaseContext();
+
         DaggerAppComponent.builder()
                 .application(this)
                 .build()

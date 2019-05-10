@@ -3,12 +3,14 @@ package com.tao.note.ui.createrecord;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.tao.note.R;
 import com.tao.note.data.DataManager;
 import com.tao.note.ui.base.BaseViewModel;
 import com.tao.note.utils.Util;
@@ -140,6 +142,10 @@ public class CreateRecordViewModel extends BaseViewModel<CreateRecordNavigator> 
         getNavigator().showRecordDateDialog();
     }
 
+    public void onConfirmClick() {
+
+    }
+
     @BindingAdapter(value = {"money", "unitPrice", "quantity"}, requireAll = false)
     public static void setText(TextView view, String money, String unitPrice, String quantity) {
         if (!TextUtils.isEmpty(money)) {
@@ -150,6 +156,23 @@ public class CreateRecordViewModel extends BaseViewModel<CreateRecordNavigator> 
         } else {
             view.setText("0");
         }
+    }
+
+    @BindingAdapter(value = {"recordType", "money", "unitPrice", "quantity"}, requireAll = false)
+    public static void setTitle(Toolbar view, String recordType, String money, String unitPrice, String quantity) {
+        StringBuilder title = new StringBuilder();
+        title.append(recordType);
+        title.append("   ");
+        if (!TextUtils.isEmpty(money)) {
+            title.append(money);
+        } else if (!TextUtils.isEmpty(unitPrice) && !TextUtils.isEmpty(quantity)) {
+            Float result = Float.parseFloat(unitPrice) * Float.parseFloat(quantity);
+            title.append(result);
+        } else {
+            title.append(0);
+        }
+        title.append("元");
+        view.setTitle(title);
     }
 
 }
